@@ -103,19 +103,47 @@
         opacity: 1 !important; transform: none !important; animation: none !important;
       }
       .stagger > * { transition-delay: 0ms !important; }
-      .pills-track { animation: none !important; }
+      .pills-track, .logo-track, .marquee-col { animation: none !important; }
     }
 
-    /* ── Scrolling pills ── */
-    @keyframes scroll-pills {
+    /* ── Scrolling carousels (very slow, Kane-style drift) ── */
+    @keyframes scroll-track {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+    .logo-track {
+      animation: scroll-track 70s linear infinite;
+      will-change: transform;
+    }
+    .logo-track:hover { animation-play-state: paused; }
     .pills-track {
-      animation: scroll-pills 28s linear infinite;
+      animation: scroll-track 60s linear infinite;
       will-change: transform;
     }
     .pills-track:hover { animation-play-state: paused; }
+
+    /* ── Vertical marquee (dual-column, opposite directions) ── */
+    @keyframes marquee-up {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    @keyframes marquee-down {
+      0%   { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
+    }
+    .marquee-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      will-change: transform;
+    }
+    .marquee-col-up  { animation: marquee-up 40s linear infinite; }
+    .marquee-col-down { animation: marquee-down 40s linear infinite; }
+    .marquee-wrap:hover .marquee-col { animation-play-state: paused; }
+    .marquee-wrap {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+    }
 
     /* ── Accordion (JS-measured height for butter-smooth expand) ── */
     .accordion-body {
@@ -220,34 +248,57 @@
         </div>
       </div>
 
-      <!-- Scrolling pills -->
-      <div class="mt-14 overflow-hidden reveal reveal-up">
-        <div class="pills-track flex w-max gap-3">
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">AI Product Strategy</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">GenAI Systems</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Data Pipelines</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Enterprise Platforms</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Catalog Management</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Campaign Automation</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Microservices</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Prompt Engineering</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Azure + Databricks</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Cross-Functional Leadership</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Python</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">SQL</span>
+      <!-- Expertise -->
+      <div class="mt-14 reveal reveal-up">
+        <p class="text-xs font-semibold uppercase tracking-widest text-txt-muted mb-5">Expertise</p>
+      </div>
+      <div class="overflow-hidden reveal reveal-up">
+        <div class="logo-track flex w-max items-center gap-6" style="animation-direction: reverse;">
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">AI Product Strategy</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">GenAI Systems Design</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Stakeholder Management</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Cross-functional Leadership</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Data Pipeline Architecture</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Enterprise Platform Delivery</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Discovery &amp; User Research</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Agile &amp; Scrum</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">OKR &amp; Roadmap Planning</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Technical Communication</span>
           <!-- duplicate for seamless loop -->
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">AI Product Strategy</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">GenAI Systems</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Data Pipelines</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Enterprise Platforms</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Catalog Management</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Campaign Automation</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Microservices</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Prompt Engineering</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Azure + Databricks</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Cross-Functional Leadership</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Python</span>
-          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">SQL</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">AI Product Strategy</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">GenAI Systems Design</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Stakeholder Management</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Cross-functional Leadership</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Data Pipeline Architecture</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Enterprise Platform Delivery</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Discovery &amp; User Research</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Agile &amp; Scrum</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">OKR &amp; Roadmap Planning</span>
+          <span class="rounded-full border border-gray-200 bg-white px-4 py-2 text-xs font-medium text-txt-secondary whitespace-nowrap">Technical Communication</span>
+        </div>
+      </div>
+
+      <div class="mt-6 overflow-hidden reveal reveal-up">
+        <div class="logo-track flex w-max items-center gap-12">
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/python.svg" alt="Python" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Python</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/postgresql.svg" alt="SQL" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">SQL</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/azure.svg" alt="Azure" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Azure</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/databricks.svg" alt="Databricks" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Databricks</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/powerbi.svg" alt="Power BI" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Power BI</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/openai.svg" alt="GenAI" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">GenAI</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/figma.svg" alt="Figma" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Figma</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/jira.svg" alt="Jira" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Jira</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/github.svg" alt="GitHub" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">GitHub</span></div>
+          <!-- duplicate for seamless loop -->
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/python.svg" alt="Python" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Python</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/postgresql.svg" alt="SQL" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">SQL</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/azure.svg" alt="Azure" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Azure</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/databricks.svg" alt="Databricks" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Databricks</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/powerbi.svg" alt="Power BI" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Power BI</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/openai.svg" alt="GenAI" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">GenAI</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/figma.svg" alt="Figma" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Figma</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/jira.svg" alt="Jira" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">Jira</span></div>
+          <div class="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity duration-500"><img src="img/github.svg" alt="GitHub" class="h-8 w-8"><span class="text-xs font-medium text-txt-muted">GitHub</span></div>
         </div>
       </div>
     </div>
@@ -308,18 +359,21 @@
         <p class="mt-3 max-w-2xl text-txt-secondary">AI and platform initiatives I designed and led inside a Fortune 500 B2B ecosystem.</p>
       </div>
 
-      <div class="mt-12 space-y-4 stagger" id="works-list">
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8">
+
+      <!-- Left: compact accordion items -->
+      <div class="space-y-3 stagger" id="works-list">
 
         <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-300 hover:bg-accent-bg">
-          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
-            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Producing campaign assets 50x cheaper and in 7 minutes</h3>
-            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="accordion-btn flex w-full items-center justify-between px-4 py-3 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-base font-semibold text-txt pr-4">Producing campaign assets 50x cheaper and in 7 minutes</h3>
+            <span class="accordion-icon flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </span>
           </button>
           <div class="accordion-body">
-            <div class="px-6 pb-6 pt-0">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="px-4 pb-4 pt-0">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Marketing assets for B2B campaigns were produced by external agencies&mdash;expensive, slow, impossible to personalize at scale.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">A way to generate compliant brand assets at scale from minimal inputs.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built an AI image generation pipeline through 8 development iterations&mdash;brand book extraction, reference images, multi-product composition, natural language post-editing.</p></div>
@@ -330,15 +384,15 @@
         </div>
 
         <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-300 hover:bg-accent-bg">
-          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
-            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Turning 3 months of SKU onboarding into 2 weeks</h3>
-            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="accordion-btn flex w-full items-center justify-between px-4 py-3 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-base font-semibold text-txt pr-4">Turning 3 months of SKU onboarding into 2 weeks</h3>
+            <span class="accordion-icon flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </span>
           </button>
           <div class="accordion-body">
-            <div class="px-6 pb-6 pt-0">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="px-4 pb-4 pt-0">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Millions of SKUs across multiple business units needed manual classification against a structured taxonomy. Years of backlog.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">AI-powered classification and enrichment pipeline at enterprise scale.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built pipeline that groups raw SKUs into structured product clusters, classifies against platform taxonomy, and auto-enriches product attributes.</p></div>
@@ -349,15 +403,15 @@
         </div>
 
         <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-300 hover:bg-accent-bg">
-          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
-            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Giving operations teams an AI teammate</h3>
-            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="accordion-btn flex w-full items-center justify-between px-4 py-3 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-base font-semibold text-txt pr-4">Giving operations teams an AI teammate</h3>
+            <span class="accordion-icon flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </span>
           </button>
           <div class="accordion-body">
-            <div class="px-6 pb-6 pt-0">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="px-4 pb-4 pt-0">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Platform users needed internal support to configure fulfillment settings, troubleshoot issues and understand platform features. Heavy dependency on support teams.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">A self-service AI assistant that follows business rules accurately and delivers clear, contextual guidance.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Developed GenAI copilot specialized in operational configuration&mdash;contextual Q&A, step-by-step troubleshooting, business rule compliance.</p></div>
@@ -368,15 +422,15 @@
         </div>
 
         <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-300 hover:bg-accent-bg">
-          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
-            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Automating 67% of campaign setup effort</h3>
-            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="accordion-btn flex w-full items-center justify-between px-4 py-3 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-base font-semibold text-txt pr-4">Automating 67% of campaign setup effort</h3>
+            <span class="accordion-icon flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </span>
           </button>
           <div class="accordion-body">
-            <div class="px-6 pb-6 pt-0">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="px-4 pb-4 pt-0">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Campaign setup for digital communications involved multiple manual steps: strategy definition, audience selection, parametrization and platform integration.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">End-to-end automation pipeline from strategy input to delivery platform integration.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built pipeline: strategy ingestion, automated audience segmentation, platform-ready config generation, direct delivery platform integration.</p></div>
@@ -387,15 +441,15 @@
         </div>
 
         <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-300 hover:bg-accent-bg">
-          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
-            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Building the CMS that cut setup time from 46 minutes to 3</h3>
-            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="accordion-btn flex w-full items-center justify-between px-4 py-3 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-base font-semibold text-txt pr-4">Building the CMS that cut setup time from 46 minutes to 3</h3>
+            <span class="accordion-icon flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </span>
           </button>
           <div class="accordion-body">
-            <div class="px-6 pb-6 pt-0">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="px-4 pb-4 pt-0">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Content publishing across global markets was painfully slow and fragmented across multiple tools and processes.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">Unified CMS + DAM experience for all global markets.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Delivered unified content publishing platform consolidating workflows, asset management, and multi-market configuration.</p></div>
@@ -406,15 +460,15 @@
         </div>
 
         <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-300 hover:bg-accent-bg">
-          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
-            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Scaling flexible delivery from 20% to 85% of orders</h3>
-            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <button class="accordion-btn flex w-full items-center justify-between px-4 py-3 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-base font-semibold text-txt pr-4">Scaling flexible delivery from 20% to 85% of orders</h3>
+            <span class="accordion-icon flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </span>
           </button>
           <div class="accordion-body">
-            <div class="px-6 pb-6 pt-0">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="px-4 pb-4 pt-0">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Fulfillment configuration needed to support both ABI and third-party partners across 20 countries with 100+ distribution centers.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">Delivery platform from zero to production, integrated with the global B2B commerce app.</p></div>
                 <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built delivery configuration microservices, inventory integration, delivery date logic. 100+ DDC integrations. Front-end discovery and development.</p></div>
@@ -423,6 +477,45 @@
             </div>
           </div>
         </div>
+
+      </div>
+
+      <!-- Right: Kane-style dual-column vertical marquee -->
+      <div class="hidden lg:flex flex-col reveal reveal-up sticky top-24 self-start">
+        <p class="text-[10px] font-semibold uppercase tracking-widest text-txt-muted mb-3 text-center">Implemented in</p>
+        <div class="marquee-wrap overflow-hidden h-[340px]">
+        <div class="grid grid-cols-2 gap-2 w-full">
+          <!-- Left column — scrolls up -->
+          <div class="marquee-col marquee-col-up">
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/abinbev-logo.png" alt="AB InBev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo_Ambev.png" alt="Ambev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo ambevtech.png" alt="Ambev Tech" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/BEES Image.png" alt="BEES" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/beer-garage.png" alt="Beer Garage" class="max-h-7 max-w-[100px] object-contain"></div>
+            <!-- duplicate for seamless loop -->
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/abinbev-logo.png" alt="AB InBev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo_Ambev.png" alt="Ambev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo ambevtech.png" alt="Ambev Tech" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/BEES Image.png" alt="BEES" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/beer-garage.png" alt="Beer Garage" class="max-h-7 max-w-[100px] object-contain"></div>
+          </div>
+          <!-- Right column — scrolls down (reversed order) -->
+          <div class="marquee-col marquee-col-down">
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/beer-garage.png" alt="Beer Garage" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/BEES Image.png" alt="BEES" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo ambevtech.png" alt="Ambev Tech" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo_Ambev.png" alt="Ambev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/abinbev-logo.png" alt="AB InBev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <!-- duplicate for seamless loop -->
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/beer-garage.png" alt="Beer Garage" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/BEES Image.png" alt="BEES" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo ambevtech.png" alt="Ambev Tech" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/Logo_Ambev.png" alt="Ambev" class="max-h-7 max-w-[100px] object-contain"></div>
+            <div class="flex h-16 items-center justify-center rounded-lg bg-gray-100 p-2"><img src="img/abinbev-logo.png" alt="AB InBev" class="max-h-7 max-w-[100px] object-contain"></div>
+          </div>
+        </div>
+      </div>
+      </div>
 
       </div>
 
@@ -441,6 +534,93 @@
       </blockquote>
       <p class="mt-6 text-sm font-medium text-accent">Partner Operations Specialist</p>
       <p class="text-xs text-txt-muted">Enterprise B2B Platform</p>
+    </div>
+  </section>
+
+  <!-- ===== 7b. MY THOUGHTS ON AI ===== -->
+  <section class="border-t border-gray-200 bg-white px-5 py-12 md:py-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal reveal-up">
+        <p class="text-xs font-semibold uppercase tracking-widest text-accent">Writing &amp; Projects</p>
+        <h2 class="mt-3 font-heading text-2xl font-bold text-txt sm:text-3xl">My thoughts on AI.</h2>
+      </div>
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 stagger">
+        <a href="https://fabiosolivei.github.io/banco-tradicao/" target="_blank" rel="noopener noreferrer" class="reveal reveal-up group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-accent-bg text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="min-w-0">
+            <p class="text-sm font-semibold text-txt group-hover:text-accent transition-colors duration-300">Banco Tradi&ccedil;&atilde;o &mdash; Credit Automation</p>
+            <p class="mt-1 text-xs text-txt-muted line-clamp-2">Business case study: automating credit analysis with AI to cut processing time and reduce operational risk.</p>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7407025569978019840/" target="_blank" rel="noopener noreferrer" class="reveal reveal-up group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-accent-bg text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </div>
+          <div class="min-w-0">
+            <p class="text-sm font-semibold text-txt group-hover:text-accent transition-colors duration-300">Gen AI as platform, not project</p>
+            <p class="mt-1 text-xs text-txt-muted line-clamp-2">Why treating Gen AI as infrastructure&mdash;not isolated features&mdash;is the only way to scale learning and compound impact.</p>
+          </div>
+        </a>
+        <a href="https://fabiodesouzaoliveira.substack.com/p/e-se-a-disrupcao-nao-for-so-tecnica" target="_blank" rel="noopener noreferrer" class="reveal reveal-up group flex items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-accent-bg text-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+          </div>
+          <div class="min-w-0">
+            <p class="text-sm font-semibold text-txt group-hover:text-accent transition-colors duration-300">E se a disrup&ccedil;&atilde;o n&atilde;o for s&oacute; t&eacute;cnica?</p>
+            <p class="mt-1 text-xs text-txt-muted line-clamp-2">Maybe the biggest change isn't in AI models&mdash;but in how we interact with the world. From Tolans to Google's glasses.</p>
+          </div>
+        </a>
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:shadow-lg sm:col-span-3">
+          <div class="flex items-start gap-4 cursor-pointer" onclick="const b=this.parentElement.querySelector('[data-expand]');const ic=this.querySelector('[data-chevron]');b.classList.toggle('hidden');ic.classList.toggle('rotate-180')">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-accent-bg text-accent">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="text-sm font-semibold text-txt">Wireframe Collaboration Tool</p>
+                <span class="rounded-full bg-accent-bg px-2 py-0.5 text-[10px] font-semibold uppercase text-accent">Personal Project</span>
+              </div>
+              <p class="mt-1 text-xs text-txt-muted">AI-powered innovation platform for creating production wireframes, collecting feedback, and iterating designs with a page builder agent.</p>
+            </div>
+            <svg data-chevron width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-txt-muted transition-transform duration-300"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div data-expand class="hidden mt-4 border-t border-gray-100 pt-4">
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-4 mb-4 mx-auto max-w-3xl">
+              <div class="grid grid-cols-1 gap-3">
+                <div class="rounded-xl bg-gray-50 p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    <p class="text-xs font-semibold text-txt">AI Wireframe Generation</p>
+                  </div>
+                  <p class="text-[11px] leading-relaxed text-txt-muted">Create production-quality wireframes with AI-generated designs and iterate using a Page Builder Agent as your designer.</p>
+                </div>
+                <div class="rounded-xl bg-gray-50 p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <p class="text-xs font-semibold text-txt">Visual Feedback &amp; Testing</p>
+                  </div>
+                  <p class="text-[11px] leading-relaxed text-txt-muted">Collect feedback from users who can visually mark their comments directly on the page, and run usability tests tracked with tasks.</p>
+                </div>
+                <div class="rounded-xl bg-gray-50 p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <p class="text-xs font-semibold text-txt">MVP Launchpad</p>
+                  </div>
+                  <p class="text-[11px] leading-relaxed text-txt-muted">Test wireframes as MVPs with real users and real data in a controlled environment, then collect metrics to iterate with the agent.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-center">
+                <img src="img/flywheel.png" alt="Innovation flywheel: User Insights, Visual Feedback, AI-Generated Wireframes, AI-Powered Iteration" class="max-h-72 object-contain">
+              </div>
+            </div>
+            <video class="mx-auto w-full max-w-3xl rounded-lg" controls muted playsinline preload="metadata">
+              <source src="img/wireframe-demo.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -601,25 +781,29 @@
         <p class="text-xs font-semibold uppercase tracking-widest text-accent">Education</p>
       </div>
       <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 stagger">
-        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6">
+        <div class="reveal reveal-up relative rounded-2xl border border-gray-200 bg-white p-6 pb-14">
           <h3 class="font-heading text-lg font-bold text-txt">MBA in Data & AI</h3>
           <p class="mt-1 text-sm text-txt-secondary">Inteli &mdash; Institute of Technology and Leadership</p>
           <p class="mt-2 text-xs font-medium text-accent">2025 &ndash; Present</p>
+          <img src="img/logo-inteli.png" alt="Inteli" class="absolute bottom-4 right-4 h-10 max-w-24 object-contain opacity-40">
         </div>
-        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6">
+        <div class="reveal reveal-up relative rounded-2xl border border-gray-200 bg-white p-6 pb-14">
           <h3 class="font-heading text-lg font-bold text-txt">Chemical Engineering</h3>
           <p class="mt-1 text-sm text-txt-secondary">University of S&atilde;o Paulo (USP) &mdash; Polytechnic School</p>
           <p class="mt-2 text-xs font-medium text-accent">2017</p>
+          <img src="img/usp-logo.svg" alt="USP" class="absolute bottom-4 right-4 h-7 max-w-16 object-contain opacity-40">
         </div>
-        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6">
+        <div class="reveal reveal-up relative rounded-2xl border border-gray-200 bg-white p-6 pb-14">
           <h3 class="font-heading text-lg font-bold text-txt">Research Program &mdash; Chemical Engineering</h3>
           <p class="mt-1 text-sm text-txt-secondary">Eberhard Karls Universit&auml;t T&uuml;bingen, Germany</p>
           <p class="mt-2 text-xs font-medium text-accent">2015</p>
+          <img src="img/The-Eberhard-Karls-University-of-Tubingen.png" alt="Universit&auml;t T&uuml;bingen" class="absolute bottom-4 right-4 h-8 max-w-28 object-contain opacity-40">
         </div>
-        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6">
+        <div class="reveal reveal-up relative rounded-2xl border border-gray-200 bg-white p-6 pb-14">
           <h3 class="font-heading text-lg font-bold text-txt">Exchange Student Program</h3>
           <p class="mt-1 text-sm text-txt-secondary">Lufkin High School, Texas, USA</p>
           <p class="mt-2 text-xs font-medium text-accent">2007</p>
+          <img src="img/Lufkin High School.jpg" alt="Lufkin High School" class="absolute bottom-4 right-4 h-12 w-12 object-contain opacity-40">
         </div>
       </div>
     </div>
@@ -675,6 +859,7 @@
     });
 
     // ── Cinematic scroll reveals (Progano-style) ──
+    const revealEls = document.querySelectorAll('.reveal');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -683,7 +868,20 @@
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    revealEls.forEach(el => obs.observe(el));
+
+    function revealVisibleNow() {
+      revealEls.forEach(el => {
+        if (el.classList.contains('visible')) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+          obs.unobserve(el);
+        }
+      });
+    }
+    window.addEventListener('load', () => { revealVisibleNow(); requestAnimationFrame(revealVisibleNow); });
+    document.fonts.ready.then(() => { revealVisibleNow(); requestAnimationFrame(revealVisibleNow); });
 
     // ── Smooth accordion (measure real height) ──
     function toggleAccordion(body, open) {

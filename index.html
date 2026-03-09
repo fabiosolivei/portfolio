@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fábio Oliveira — AI & Enterprise Product Leader</title>
+  <meta name="description" content="Group Product Manager building AI capabilities inside real production systems. 2M+ B2B customers, 20+ global markets, 5 AI products shipped.">
+
+  <meta property="og:title" content="Fábio Oliveira — AI & Enterprise Product Leader">
+  <meta property="og:description" content="Group Product Manager building AI capabilities inside real production systems at a Fortune 500 FMCG company.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fabiosolivei.github.io">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%233B82F6'/><text x='50' y='68' font-size='55' font-family='sans-serif' font-weight='700' fill='white' text-anchor='middle'>FO</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            surface: '#1E293B',
+            subtle: '#334155',
+            accent: '#3B82F6',
+            highlight: '#22C55E',
+            muted: '#94A3B8',
+            base: '#0F172A',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .gradient-line {
+      height: 3px;
+      background: linear-gradient(90deg, #3B82F6, #22C55E);
+      border-radius: 2px;
+    }
+
+    .card-expand { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+    .card-expand.open { max-height: 600px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card-expand { transition: none; }
+    }
+
+    .timeline-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid #3B82F6;
+      background: #0F172A;
+      flex-shrink: 0;
+    }
+    .timeline-line {
+      width: 2px;
+      background: #334155;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body class="bg-base text-slate-50 antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="fixed top-4 left-4 right-4 z-50 mx-auto max-w-5xl">
+    <div class="flex items-center justify-between rounded-xl border border-subtle bg-base/80 px-6 py-3 backdrop-blur-md">
+      <a href="#hero" class="font-heading text-lg font-semibold tracking-tight cursor-pointer transition-colors duration-200 hover:text-accent">FO</a>
+      <div class="hidden items-center gap-6 sm:flex">
+        <a href="#impact" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Impact</a>
+        <a href="#framework" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Framework</a>
+        <a href="#projects" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Projects</a>
+        <a href="#career" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Career</a>
+        <a href="#contact" class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-600 cursor-pointer">
+          Contact
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="sm:hidden cursor-pointer text-muted hover:text-slate-50 transition-colors duration-200" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="mt-2 hidden rounded-xl border border-subtle bg-base/95 px-6 py-4 backdrop-blur-md sm:hidden">
+      <div class="flex flex-col gap-4">
+        <a href="#impact" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Impact</a>
+        <a href="#framework" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Framework</a>
+        <a href="#projects" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Projects</a>
+        <a href="#career" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Career</a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-600 cursor-pointer">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero" class="relative flex min-h-screen items-center justify-center px-4 pt-24 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <div class="fade-up">
+        <p class="mb-4 text-sm font-medium uppercase tracking-widest text-accent">AI & Enterprise Platforms</p>
+        <h1 class="font-heading text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+          Fábio Oliveira
+        </h1>
+        <p class="mt-4 font-heading text-xl font-medium text-muted sm:text-2xl">
+          Group Product Manager
+        </p>
+      </div>
+
+      <div class="fade-up mt-8">
+        <div class="gradient-line mx-auto w-24"></div>
+      </div>
+
+      <div class="fade-up mt-8">
+        <p class="mx-auto max-w-xl text-lg leading-relaxed text-slate-300">
+          I build AI capabilities inside real production systems&mdash;not experiments.
+          Scaling enterprise platforms across 20+ markets serving 2M+ B2B customers.
+        </p>
+      </div>
+
+      <div class="fade-up mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href="#projects" class="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-blue-600 hover:-translate-y-0.5 cursor-pointer">
+          View Projects
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/fabiosolivei/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-subtle px-6 py-3 font-medium text-slate-300 transition-all duration-200 hover:border-accent hover:text-white hover:-translate-y-0.5 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-muted">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== IMPACT BAR ===== -->
+  <section id="impact" class="border-y border-subtle bg-surface/50 px-4 py-16 sm:px-6">
+    <div class="mx-auto grid max-w-5xl grid-cols-2 gap-8 lg:grid-cols-4">
+      <div class="fade-up text-center">
+        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">2M+</p>
+        <p class="mt-2 text-sm text-muted">B2B Customers Served</p>
+      </div>
+      <div class="fade-up text-center">
+        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">20+</p>
+        <p class="mt-2 text-sm text-muted">Global Markets</p>
+      </div>
+      <div class="fade-up text-center">
+        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">50x</p>
+        <p class="mt-2 text-sm text-muted">Cost Reduction via AI</p>
+      </div>
+      <div class="fade-up text-center">
+        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">5</p>
+        <p class="mt-2 text-sm text-muted">AI Products Shipped</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AI OPERATING MODEL ===== -->
+  <section id="framework" class="px-4 py-20 sm:px-6 lg:py-28">
+    <div class="mx-auto max-w-5xl">
+      <div class="fade-up text-center">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent">Methodology</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">AI Operating Model</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-muted">
+          A structured framework for introducing AI into enterprise systems already in production&mdash;proving value fast without disrupting operations.
+        </p>
+      </div>
+
+      <div class="fade-up mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Design -->
+        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold">Design</h3>
+          <p class="mt-2 text-sm text-muted">Rebuild processes embedding AI as core components, not bolt-ons.</p>
+          <p class="mt-3 text-xs font-medium text-accent">~2 weeks</p>
+        </div>
+        <!-- Validate -->
+        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.77 4 4 0 0 1 0 6.76 4 4 0 0 1-4.78 4.77 4 4 0 0 1-6.74 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold">Validate</h3>
+          <p class="mt-2 text-sm text-muted">Test solutions with real users to confirm design and ensure value capture.</p>
+          <p class="mt-3 text-xs font-medium text-accent">~6 weeks</p>
+        </div>
+        <!-- Realize -->
+        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold">Realize</h3>
+          <p class="mt-2 text-sm text-muted">Change management to ensure sustainable value before scaling.</p>
+          <p class="mt-3 text-xs font-medium text-accent">~3 months</p>
+        </div>
+        <!-- Scale -->
+        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold">Scale</h3>
+          <p class="mt-2 text-sm text-muted">Enable solutions to become platform-level features across markets.</p>
+          <p class="mt-3 text-xs font-medium text-accent">Production</p>
+        </div>
+      </div>
+
+      <div class="fade-up mt-10 text-center">
+        <p class="text-sm text-muted italic">
+          Key principle: Data/AI teams own the intelligence layer. Product teams own the user journey. I bridge both.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CASE STUDIES ===== -->
+  <section id="projects" class="border-t border-subtle bg-surface/30 px-4 py-20 sm:px-6 lg:py-28">
+    <div class="mx-auto max-w-5xl">
+      <div class="fade-up text-center">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent">Portfolio</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">AI Products Shipped</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-muted">
+          Five production AI systems built inside a Fortune 500 global B2B commerce platform.
+        </p>
+      </div>
+
+      <div class="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+        <!-- Card 1: AI Image Generation -->
+        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
+          <div class="flex items-start justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            </div>
+            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">50x cheaper</span>
+          </div>
+          <h3 class="mt-4 font-heading text-xl font-semibold">AI Image Generation</h3>
+          <p class="mt-1 text-sm text-muted">Marketing campaign assets at scale</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-300">
+            Built an AI pipeline producing campaign assets from minimal inputs&mdash;brand guide, product selection, and layout preference&mdash;replacing expensive agency workflows.
+          </p>
+          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
+            <span>View details</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="card-expand">
+            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
+              <div class="grid grid-cols-3 gap-3">
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">50x</p>
+                  <p class="text-xs text-muted">Cost reduction</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">&lt;7 min</p>
+                  <p class="text-xs text-muted">Per 3 iterations</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">8</p>
+                  <p class="text-xs text-muted">Dev iterations</p>
+                </div>
+              </div>
+              <p class="text-sm text-muted">Capabilities: brand book extraction, reference image guidance, multi-product composition, natural language post-editing, catalog tile generation.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Catalog Classification -->
+        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
+          <div class="flex items-start justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+            </div>
+            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">95% complete</span>
+          </div>
+          <h3 class="mt-4 font-heading text-xl font-semibold">AI Catalog Classification</h3>
+          <p class="mt-1 text-sm text-muted">Product enrichment at enterprise scale</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-300">
+            Built an AI classification and enrichment pipeline that groups raw SKUs into structured products, classifies against platform taxonomy, and auto-enriches attributes.
+          </p>
+          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
+            <span>View details</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="card-expand">
+            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">3mo&rarr;2wk</p>
+                  <p class="text-xs text-muted">Onboarding time</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">95%</p>
+                  <p class="text-xs text-muted">Completeness</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">98%</p>
+                  <p class="text-xs text-muted">Brand matching</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">11k</p>
+                  <p class="text-xs text-muted">SKUs processed</p>
+                </div>
+              </div>
+              <p class="text-sm text-muted">Designed for phased migration into the main platform, moving from external tooling to integrated admin features.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: GenAI Copilot -->
+        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
+          <div class="flex items-start justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+            </div>
+            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">~80% positive</span>
+          </div>
+          <h3 class="mt-4 font-heading text-xl font-semibold">GenAI Operations Copilot</h3>
+          <p class="mt-1 text-sm text-muted">Self-service troubleshooting for partners</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-300">
+            Developed a GenAI-powered assistant specialized in operational configuration&mdash;answering contextual questions, providing troubleshooting guidance, and following business rules accurately.
+          </p>
+          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
+            <span>View details</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="card-expand">
+            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
+              <blockquote class="border-l-2 border-accent pl-4 text-sm italic text-slate-300">
+                "I was asked to make a configuration adjustment affecting thousands of points of sale&mdash;I could make the adjustment thanks to the copilot."
+              </blockquote>
+              <blockquote class="border-l-2 border-accent pl-4 text-sm italic text-slate-300">
+                "It follows the business rules very well. The descriptions and instructions are clear and contextual."
+              </blockquote>
+              <p class="text-sm text-muted">Reduces operational dependency on internal support teams, enabling partner autonomy at scale.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4: Campaign Automation -->
+        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
+          <div class="flex items-start justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
+            </div>
+            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">67% less effort</span>
+          </div>
+          <h3 class="mt-4 font-heading text-xl font-semibold">Campaign Automation</h3>
+          <p class="mt-1 text-sm text-muted">End-to-end digital campaign pipeline</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-300">
+            Built an automation pipeline that ingests campaign strategy, automates audience segmentation, generates platform-ready configs, and integrates with delivery platforms.
+          </p>
+          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
+            <span>View details</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="card-expand">
+            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">67%</p>
+                  <p class="text-xs text-muted">Effort reduction</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">100%</p>
+                  <p class="text-xs text-muted">Audience auto</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">80%</p>
+                  <p class="text-xs text-muted">Fully automated</p>
+                </div>
+                <div class="rounded-lg bg-base p-3 text-center">
+                  <p class="font-heading text-lg font-bold text-highlight">-30%</p>
+                  <p class="text-xs text-muted">Param. time</p>
+                </div>
+              </div>
+              <p class="text-sm text-muted">Uses orchestrated data transformation notebooks handling ingestion, validation and output generation.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5: Platform Architecture -->
+        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent lg:col-span-2">
+          <div class="flex items-start justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+            </div>
+            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">20+ markets</span>
+          </div>
+          <h3 class="mt-4 font-heading text-xl font-semibold">Platform & Architecture Philosophy</h3>
+          <p class="mt-1 text-sm text-muted">Layered system separating AI intelligence from user experience</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-300">
+            Designed the conceptual architecture enabling rapid AI experimentation while maintaining enterprise reliability. Clear contracts between layers enable independent evolution.
+          </p>
+          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
+            <span>View architecture</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="card-expand">
+            <div class="mt-4 border-t border-subtle pt-4">
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="rounded-lg border border-subtle bg-base p-4">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">User Experience</p>
+                  <p class="mt-2 text-sm text-muted">Frontend, BFF, CRUD Layer</p>
+                </div>
+                <div class="rounded-lg border border-subtle bg-base p-4">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">AI & Orchestration</p>
+                  <p class="mt-2 text-sm text-muted">Model Serving, Prompt Orchestration, Search</p>
+                </div>
+                <div class="rounded-lg border border-subtle bg-base p-4">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">Data Platform</p>
+                  <p class="mt-2 text-sm text-muted">Pipelines, Feature Store, Analytics</p>
+                </div>
+                <div class="rounded-lg border border-subtle bg-base p-4">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">Infrastructure</p>
+                  <p class="mt-2 text-sm text-muted">Compute, Storage, Auth, Monitoring</p>
+                </div>
+              </div>
+              <div class="mt-4 grid grid-cols-1 gap-3 text-sm text-muted sm:grid-cols-2">
+                <p><span class="text-slate-300 font-medium">Separation of concerns:</span> AI infra owned by data teams, UX owned by product teams.</p>
+                <p><span class="text-slate-300 font-medium">Rapid experimentation:</span> Containerized microservices for independent AI deployment.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAREER ARC ===== -->
+  <section id="career" class="px-4 py-20 sm:px-6 lg:py-28">
+    <div class="mx-auto max-w-3xl">
+      <div class="fade-up text-center">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent">Trajectory</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">Career Arc</h2>
+        <p class="mx-auto mt-4 max-w-xl text-muted">
+          Engineering &rarr; Operations &rarr; Data &rarr; Product &rarr; AI
+        </p>
+      </div>
+
+      <div class="mt-14 space-y-0">
+        <!-- Timeline Item 1 -->
+        <div class="fade-up flex gap-6">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line flex-1"></div>
+          </div>
+          <div class="pb-12">
+            <p class="text-xs font-medium uppercase tracking-wider text-accent">2018 &ndash; 2020</p>
+            <h3 class="mt-1 font-heading text-lg font-semibold">Industrial Operations & Procurement</h3>
+            <p class="mt-2 text-sm text-muted">Managed $200MM+ industrial portfolio across LATAM. Built the operational foundation&mdash;understanding supply chains, supplier strategy, and CAPEX investment at scale.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="fade-up flex gap-6">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line flex-1"></div>
+          </div>
+          <div class="pb-12">
+            <p class="text-xs font-medium uppercase tracking-wider text-accent">2020 &ndash; 2021</p>
+            <h3 class="mt-1 font-heading text-lg font-semibold">Data Platforms</h3>
+            <p class="mt-2 text-sm text-muted">Led 4 data engineering teams. Deployed 50+ production pipelines with &lt;1% failure rate. Scaled analytics adoption from 300 to 11,000 users (+3,000%). Created NPS measurement for internal platforms (NPS 80).</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="fade-up flex gap-6">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line flex-1"></div>
+          </div>
+          <div class="pb-12">
+            <p class="text-xs font-medium uppercase tracking-wider text-accent">2021 &ndash; 2024</p>
+            <h3 class="mt-1 font-heading text-lg font-semibold">Product Management &mdash; Fulfillment</h3>
+            <p class="mt-2 text-sm text-muted">Built fulfillment platform from 0 &rarr; production across 20 countries. Scaled flexible delivery from 20% to 85% of orders, generating R$25MM in annual revenue.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="fade-up flex gap-6">
+          <div class="flex flex-col items-center">
+            <div class="timeline-dot" style="border-color: #22C55E; box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);"></div>
+          </div>
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wider text-highlight">2025 &ndash; Present</p>
+            <h3 class="mt-1 font-heading text-lg font-semibold">AI & Enterprise Platforms</h3>
+            <p class="mt-2 text-sm text-muted">Group Product Manager leading AI-powered platforms across 20+ markets. Shipping generative AI for catalog, campaigns, operations, and partner tools serving 2M+ B2B customers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section id="education" class="border-t border-subtle bg-surface/30 px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl">
+      <div class="fade-up text-center">
+        <p class="text-sm font-medium uppercase tracking-widest text-accent">Education</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">Academic Background</h2>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div class="fade-up rounded-xl border border-subtle bg-surface p-6">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-highlight/10 text-highlight">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+          </div>
+          <h3 class="mt-4 font-heading text-lg font-semibold">MBA in Data & AI</h3>
+          <p class="mt-1 text-sm text-muted">Inteli &mdash; Institute of Technology and Leadership</p>
+          <p class="mt-2 text-xs text-accent font-medium">2025 &ndash; Present</p>
+        </div>
+        <div class="fade-up rounded-xl border border-subtle bg-surface p-6">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+          </div>
+          <h3 class="mt-4 font-heading text-lg font-semibold">Chemical Engineering</h3>
+          <p class="mt-1 text-sm text-muted">University of S&atilde;o Paulo (USP) &mdash; Polytechnic School</p>
+          <p class="mt-2 text-xs text-accent font-medium">2017</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER / CONTACT ===== -->
+  <footer id="contact" class="border-t border-subtle px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <div class="fade-up">
+        <h2 class="font-heading text-3xl font-bold sm:text-4xl">Let's connect</h2>
+        <p class="mt-4 text-muted">
+          Open to conversations about AI product strategy, enterprise platform design, and new opportunities.
+        </p>
+      </div>
+
+      <div class="fade-up mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href="mailto:fabiosouzao13@gmail.com" class="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-blue-600 hover:-translate-y-0.5 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Get in Touch
+        </a>
+        <a href="https://www.linkedin.com/in/fabiosolivei/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-subtle px-6 py-3 font-medium text-slate-300 transition-all duration-200 hover:border-accent hover:text-white hover:-translate-y-0.5 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/fabiosolivei" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-subtle px-6 py-3 font-medium text-slate-300 transition-all duration-200 hover:border-accent hover:text-white hover:-translate-y-0.5 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="mt-16 border-t border-subtle pt-8">
+        <p class="text-sm text-muted">
+          &copy; 2025&ndash;2026 F&aacute;bio Oliveira. Built with precision.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Scroll-triggered fade-in animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+    // Card expand/collapse
+    document.querySelectorAll('.card-toggle').forEach((btn) => {
+      const originalText = btn.querySelector('span').textContent;
+      const hideText = originalText.replace('View', 'Hide');
+      btn.addEventListener('click', () => {
+        const expandable = btn.closest('article').querySelector('.card-expand');
+        const chevron = btn.querySelector('svg');
+        const isOpen = expandable.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+        chevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+        btn.querySelector('span').textContent = isOpen ? hideText : originalText;
+      });
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Active nav highlighting on scroll
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.remove('text-slate-50');
+              if (link.getAttribute('href') === '#' + entry.target.id) {
+                link.classList.add('text-slate-50');
+              }
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    sections.forEach((section) => navObserver.observe(section));
+  </script>
+
+</body>
+</html>

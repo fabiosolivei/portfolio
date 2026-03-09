@@ -5,650 +5,740 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fábio Oliveira — AI & Enterprise Product Leader</title>
   <meta name="description" content="Group Product Manager building AI capabilities inside real production systems. 2M+ B2B customers, 20+ global markets, 5 AI products shipped.">
-
   <meta property="og:title" content="Fábio Oliveira — AI & Enterprise Product Leader">
   <meta property="og:description" content="Group Product Manager building AI capabilities inside real production systems at a Fortune 500 FMCG company.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fabiosolivei.github.io">
   <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%233B82F6'/><text x='50' y='68' font-size='55' font-family='sans-serif' font-weight='700' fill='white' text-anchor='middle'>FO</text></svg>">
-
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%230F766E'/><text x='50' y='68' font-size='55' font-family='sans-serif' font-weight='700' fill='white' text-anchor='middle'>FO</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            heading: ['"Space Grotesk"', 'sans-serif'],
-            body: ['"DM Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+            body: ['"Work Sans"', 'sans-serif'],
           },
           colors: {
-            surface: '#1E293B',
-            subtle: '#334155',
-            accent: '#3B82F6',
-            highlight: '#22C55E',
-            muted: '#94A3B8',
-            base: '#0F172A',
+            accent: { DEFAULT: '#0F766E', hover: '#14B8A6', light: '#CCFBF1', bg: '#F0FDFA' },
+            base: '#F8FAFB',
+            txt: { DEFAULT: '#1A202C', secondary: '#4A5568', muted: '#718096' },
           },
         },
       },
     }
   </script>
   <style>
-    body { font-family: 'DM Sans', sans-serif; }
-    h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+    html, body { overflow-x: hidden; }
+    body { font-family: 'Work Sans', sans-serif; }
+    h1,h2,h3,h4,h5,h6,.font-heading { font-family: 'Outfit', sans-serif; }
 
-    .fade-up {
+    /* ── Progano-style cinematic scroll reveals ── */
+    .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      will-change: transform, opacity;
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    .fade-up.visible {
+    .reveal-up    { transform: perspective(1200px) translateY(80px); }
+    .reveal-left  { transform: perspective(1200px) translateX(-60px); }
+    .reveal-right { transform: perspective(1200px) translateX(60px); }
+    .reveal-scale { transform: perspective(1200px) scale(0.92); }
+    .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: perspective(1200px) translateY(0) translateX(0) scale(1);
+      will-change: auto;
+    }
+
+    /* Hero entrance — fires on page load, not scroll */
+    .hero-enter {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-enter:nth-child(1) { animation-delay: 0.05s; }
+    .hero-enter:nth-child(2) { animation-delay: 0.15s; }
+    .hero-enter:nth-child(3) { animation-delay: 0.30s; }
+    .hero-enter:nth-child(4) { animation-delay: 0.45s; }
+    @keyframes heroIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-svg-enter {
+      opacity: 0;
+      transform: scale(0.88);
+      animation: heroSvgIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s forwards;
+    }
+    @keyframes heroSvgIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Staggered children — slightly wider gaps for cinematic feel */
+    .stagger > *:nth-child(1) { transition-delay: 0ms; }
+    .stagger > *:nth-child(2) { transition-delay: 120ms; }
+    .stagger > *:nth-child(3) { transition-delay: 240ms; }
+    .stagger > *:nth-child(4) { transition-delay: 360ms; }
+    .stagger > *:nth-child(5) { transition-delay: 480ms; }
+    .stagger > *:nth-child(6) { transition-delay: 600ms; }
+
+    /* Nav entrance */
+    .nav-enter {
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: navIn 0.4s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+    }
+    @keyframes navIn {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .fade-up {
-        opacity: 1;
-        transform: none;
-        transition: none;
+      .reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1 !important; transform: none !important; transition: none !important; will-change: auto !important;
       }
+      .hero-enter, .hero-svg-enter, .nav-enter {
+        opacity: 1 !important; transform: none !important; animation: none !important;
+      }
+      .stagger > * { transition-delay: 0ms !important; }
+      .pills-track { animation: none !important; }
     }
 
-    .gradient-line {
-      height: 3px;
-      background: linear-gradient(90deg, #3B82F6, #22C55E);
-      border-radius: 2px;
+    /* ── Scrolling pills ── */
+    @keyframes scroll-pills {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
+    .pills-track {
+      animation: scroll-pills 28s linear infinite;
+      will-change: transform;
+    }
+    .pills-track:hover { animation-play-state: paused; }
 
-    .card-expand { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-    .card-expand.open { max-height: 600px; }
+    /* ── Accordion (JS-measured height for butter-smooth expand) ── */
+    .accordion-body {
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+      transition: height 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .accordion-body.open { opacity: 1; }
 
-    @media (prefers-reduced-motion: reduce) {
-      .card-expand { transition: none; }
-    }
-
-    .timeline-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 3px solid #3B82F6;
-      background: #0F172A;
-      flex-shrink: 0;
-    }
-    .timeline-line {
-      width: 2px;
-      background: #334155;
-      flex-shrink: 0;
-    }
+    /* ── Timeline ── */
+    .tl-dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid #0F766E; background: #F8FAFB; flex-shrink: 0; z-index: 1; }
+    .tl-line { width: 2px; background: #E2E8F0; flex-shrink: 0; }
   </style>
 </head>
 
-<body class="bg-base text-slate-50 antialiased">
+<body class="bg-base text-txt antialiased">
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="fixed top-4 left-4 right-4 z-50 mx-auto max-w-5xl">
-    <div class="flex items-center justify-between rounded-xl border border-subtle bg-base/80 px-6 py-3 backdrop-blur-md">
-      <a href="#hero" class="font-heading text-lg font-semibold tracking-tight cursor-pointer transition-colors duration-200 hover:text-accent">FO</a>
-      <div class="hidden items-center gap-6 sm:flex">
-        <a href="#impact" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Impact</a>
-        <a href="#framework" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Framework</a>
-        <a href="#projects" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Projects</a>
-        <a href="#career" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Career</a>
-        <a href="#contact" class="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-600 cursor-pointer">
-          Contact
-        </a>
+  <!-- ===== 1. NAVIGATION ===== -->
+  <nav class="nav-enter fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#hero" class="font-heading text-xl font-bold cursor-pointer">
+        <span class="text-accent">Fábio</span> <span class="text-txt">Oliveira.</span>
+      </a>
+      <div class="hidden items-center gap-8 md:flex">
+        <a href="#about" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">About</a>
+        <a href="#works" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Works</a>
+        <a href="#experience" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Experience</a>
+        <a href="#approach" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Approach</a>
+        <a href="#contact" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Get in Touch</a>
       </div>
-      <button id="mobile-menu-btn" class="sm:hidden cursor-pointer text-muted hover:text-slate-50 transition-colors duration-200" aria-label="Toggle menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <button id="mob-btn" class="md:hidden cursor-pointer text-txt-muted hover:text-accent transition-colors duration-150" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
       </button>
     </div>
-    <div id="mobile-menu" class="mt-2 hidden rounded-xl border border-subtle bg-base/95 px-6 py-4 backdrop-blur-md sm:hidden">
+    <div id="mob-menu" class="hidden border-t border-gray-100 bg-white px-5 py-4 md:hidden">
       <div class="flex flex-col gap-4">
-        <a href="#impact" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Impact</a>
-        <a href="#framework" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Framework</a>
-        <a href="#projects" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Projects</a>
-        <a href="#career" class="text-sm text-muted transition-colors duration-200 hover:text-slate-50 cursor-pointer">Career</a>
-        <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-600 cursor-pointer">Contact</a>
+        <a href="#about" class="text-sm text-txt-muted hover:text-accent cursor-pointer">About</a>
+        <a href="#works" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Works</a>
+        <a href="#experience" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Experience</a>
+        <a href="#approach" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Approach</a>
+        <a href="#contact" class="rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-white cursor-pointer">Get in Touch</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
-  <section id="hero" class="relative flex min-h-screen items-center justify-center px-4 pt-24 sm:px-6">
-    <div class="mx-auto max-w-3xl text-center">
-      <div class="fade-up">
-        <p class="mb-4 text-sm font-medium uppercase tracking-widest text-accent">AI & Enterprise Platforms</p>
-        <h1 class="font-heading text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-7xl">
-          Fábio Oliveira
+  <!-- ===== 2. HERO ===== -->
+  <section id="hero" class="px-5 pt-28 pb-16 md:pt-36 md:pb-24">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-5">
+      <div class="md:col-span-3">
+        <p class="hero-enter text-sm font-medium text-txt-muted">Build with confidence. Ship with clarity.</p>
+        <h1 class="hero-enter mt-4 font-heading text-4xl font-bold leading-tight text-txt sm:text-5xl lg:text-[3.5rem] lg:leading-[1.15]">
+          I build AI capabilities inside systems that actually run the business.
         </h1>
-        <p class="mt-4 font-heading text-xl font-medium text-muted sm:text-2xl">
-          Group Product Manager
-        </p>
-      </div>
-
-      <div class="fade-up mt-8">
-        <div class="gradient-line mx-auto w-24"></div>
-      </div>
-
-      <div class="fade-up mt-8">
-        <p class="mx-auto max-w-xl text-lg leading-relaxed text-slate-300">
-          I build AI capabilities inside real production systems&mdash;not experiments.
-          Scaling enterprise platforms across 20+ markets serving 2M+ B2B customers.
-        </p>
-      </div>
-
-      <div class="fade-up mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a href="#projects" class="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-blue-600 hover:-translate-y-0.5 cursor-pointer">
-          View Projects
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/fabiosolivei/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-subtle px-6 py-3 font-medium text-slate-300 transition-all duration-200 hover:border-accent hover:text-white hover:-translate-y-0.5 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </div>
-
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-muted">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-    </div>
-  </section>
-
-  <!-- ===== IMPACT BAR ===== -->
-  <section id="impact" class="border-y border-subtle bg-surface/50 px-4 py-16 sm:px-6">
-    <div class="mx-auto grid max-w-5xl grid-cols-2 gap-8 lg:grid-cols-4">
-      <div class="fade-up text-center">
-        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">2M+</p>
-        <p class="mt-2 text-sm text-muted">B2B Customers Served</p>
-      </div>
-      <div class="fade-up text-center">
-        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">20+</p>
-        <p class="mt-2 text-sm text-muted">Global Markets</p>
-      </div>
-      <div class="fade-up text-center">
-        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">50x</p>
-        <p class="mt-2 text-sm text-muted">Cost Reduction via AI</p>
-      </div>
-      <div class="fade-up text-center">
-        <p class="font-heading text-4xl font-bold text-highlight sm:text-5xl">5</p>
-        <p class="mt-2 text-sm text-muted">AI Products Shipped</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== AI OPERATING MODEL ===== -->
-  <section id="framework" class="px-4 py-20 sm:px-6 lg:py-28">
-    <div class="mx-auto max-w-5xl">
-      <div class="fade-up text-center">
-        <p class="text-sm font-medium uppercase tracking-widest text-accent">Methodology</p>
-        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">AI Operating Model</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-muted">
-          A structured framework for introducing AI into enterprise systems already in production&mdash;proving value fast without disrupting operations.
-        </p>
-      </div>
-
-      <div class="fade-up mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <!-- Design -->
-        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
-          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-          </div>
-          <h3 class="font-heading text-lg font-semibold">Design</h3>
-          <p class="mt-2 text-sm text-muted">Rebuild processes embedding AI as core components, not bolt-ons.</p>
-          <p class="mt-3 text-xs font-medium text-accent">~2 weeks</p>
+        <div class="hero-enter mt-8 flex flex-wrap items-center gap-4">
+          <a href="#contact" class="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Let's Connect</a>
+          <a href="#about" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors duration-200 hover:text-accent-hover cursor-pointer">
+            Go on...
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
         </div>
-        <!-- Validate -->
-        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
-          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.77 4 4 0 0 1 0 6.76 4 4 0 0 1-4.78 4.77 4 4 0 0 1-6.74 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <h3 class="font-heading text-lg font-semibold">Validate</h3>
-          <p class="mt-2 text-sm text-muted">Test solutions with real users to confirm design and ensure value capture.</p>
-          <p class="mt-3 text-xs font-medium text-accent">~6 weeks</p>
-        </div>
-        <!-- Realize -->
-        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
-          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-          </div>
-          <h3 class="font-heading text-lg font-semibold">Realize</h3>
-          <p class="mt-2 text-sm text-muted">Change management to ensure sustainable value before scaling.</p>
-          <p class="mt-3 text-xs font-medium text-accent">~3 months</p>
-        </div>
-        <!-- Scale -->
-        <div class="group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent hover:-translate-y-1">
-          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          </div>
-          <h3 class="font-heading text-lg font-semibold">Scale</h3>
-          <p class="mt-2 text-sm text-muted">Enable solutions to become platform-level features across markets.</p>
-          <p class="mt-3 text-xs font-medium text-accent">Production</p>
-        </div>
-      </div>
-
-      <div class="fade-up mt-10 text-center">
-        <p class="text-sm text-muted italic">
-          Key principle: Data/AI teams own the intelligence layer. Product teams own the user journey. I bridge both.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CASE STUDIES ===== -->
-  <section id="projects" class="border-t border-subtle bg-surface/30 px-4 py-20 sm:px-6 lg:py-28">
-    <div class="mx-auto max-w-5xl">
-      <div class="fade-up text-center">
-        <p class="text-sm font-medium uppercase tracking-widest text-accent">Portfolio</p>
-        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">AI Products Shipped</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-muted">
-          Five production AI systems built inside a Fortune 500 global B2B commerce platform.
-        </p>
-      </div>
-
-      <div class="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
-
-        <!-- Card 1: AI Image Generation -->
-        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
-          <div class="flex items-start justify-between">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-            </div>
-            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">50x cheaper</span>
-          </div>
-          <h3 class="mt-4 font-heading text-xl font-semibold">AI Image Generation</h3>
-          <p class="mt-1 text-sm text-muted">Marketing campaign assets at scale</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-300">
-            Built an AI pipeline producing campaign assets from minimal inputs&mdash;brand guide, product selection, and layout preference&mdash;replacing expensive agency workflows.
-          </p>
-          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
-            <span>View details</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="card-expand">
-            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
-              <div class="grid grid-cols-3 gap-3">
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">50x</p>
-                  <p class="text-xs text-muted">Cost reduction</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">&lt;7 min</p>
-                  <p class="text-xs text-muted">Per 3 iterations</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">8</p>
-                  <p class="text-xs text-muted">Dev iterations</p>
-                </div>
-              </div>
-              <p class="text-sm text-muted">Capabilities: brand book extraction, reference image guidance, multi-product composition, natural language post-editing, catalog tile generation.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2: Catalog Classification -->
-        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
-          <div class="flex items-start justify-between">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
-            </div>
-            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">95% complete</span>
-          </div>
-          <h3 class="mt-4 font-heading text-xl font-semibold">AI Catalog Classification</h3>
-          <p class="mt-1 text-sm text-muted">Product enrichment at enterprise scale</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-300">
-            Built an AI classification and enrichment pipeline that groups raw SKUs into structured products, classifies against platform taxonomy, and auto-enriches attributes.
-          </p>
-          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
-            <span>View details</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="card-expand">
-            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
-              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">3mo&rarr;2wk</p>
-                  <p class="text-xs text-muted">Onboarding time</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">95%</p>
-                  <p class="text-xs text-muted">Completeness</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">98%</p>
-                  <p class="text-xs text-muted">Brand matching</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">11k</p>
-                  <p class="text-xs text-muted">SKUs processed</p>
-                </div>
-              </div>
-              <p class="text-sm text-muted">Designed for phased migration into the main platform, moving from external tooling to integrated admin features.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3: GenAI Copilot -->
-        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
-          <div class="flex items-start justify-between">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-            </div>
-            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">~80% positive</span>
-          </div>
-          <h3 class="mt-4 font-heading text-xl font-semibold">GenAI Operations Copilot</h3>
-          <p class="mt-1 text-sm text-muted">Self-service troubleshooting for partners</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-300">
-            Developed a GenAI-powered assistant specialized in operational configuration&mdash;answering contextual questions, providing troubleshooting guidance, and following business rules accurately.
-          </p>
-          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
-            <span>View details</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="card-expand">
-            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
-              <blockquote class="border-l-2 border-accent pl-4 text-sm italic text-slate-300">
-                "I was asked to make a configuration adjustment affecting thousands of points of sale&mdash;I could make the adjustment thanks to the copilot."
-              </blockquote>
-              <blockquote class="border-l-2 border-accent pl-4 text-sm italic text-slate-300">
-                "It follows the business rules very well. The descriptions and instructions are clear and contextual."
-              </blockquote>
-              <p class="text-sm text-muted">Reduces operational dependency on internal support teams, enabling partner autonomy at scale.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 4: Campaign Automation -->
-        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent">
-          <div class="flex items-start justify-between">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
-            </div>
-            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">67% less effort</span>
-          </div>
-          <h3 class="mt-4 font-heading text-xl font-semibold">Campaign Automation</h3>
-          <p class="mt-1 text-sm text-muted">End-to-end digital campaign pipeline</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-300">
-            Built an automation pipeline that ingests campaign strategy, automates audience segmentation, generates platform-ready configs, and integrates with delivery platforms.
-          </p>
-          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
-            <span>View details</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="card-expand">
-            <div class="mt-4 space-y-3 border-t border-subtle pt-4">
-              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">67%</p>
-                  <p class="text-xs text-muted">Effort reduction</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">100%</p>
-                  <p class="text-xs text-muted">Audience auto</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">80%</p>
-                  <p class="text-xs text-muted">Fully automated</p>
-                </div>
-                <div class="rounded-lg bg-base p-3 text-center">
-                  <p class="font-heading text-lg font-bold text-highlight">-30%</p>
-                  <p class="text-xs text-muted">Param. time</p>
-                </div>
-              </div>
-              <p class="text-sm text-muted">Uses orchestrated data transformation notebooks handling ingestion, validation and output generation.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 5: Platform Architecture -->
-        <article class="fade-up group rounded-xl border border-subtle bg-surface p-6 transition-all duration-200 hover:border-accent lg:col-span-2">
-          <div class="flex items-start justify-between">
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
-            </div>
-            <span class="inline-flex items-center rounded-full bg-highlight/10 px-3 py-1 text-xs font-semibold text-highlight">20+ markets</span>
-          </div>
-          <h3 class="mt-4 font-heading text-xl font-semibold">Platform & Architecture Philosophy</h3>
-          <p class="mt-1 text-sm text-muted">Layered system separating AI intelligence from user experience</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-300">
-            Designed the conceptual architecture enabling rapid AI experimentation while maintaining enterprise reliability. Clear contracts between layers enable independent evolution.
-          </p>
-          <button class="card-toggle mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors duration-200 hover:text-blue-400 cursor-pointer" aria-expanded="false">
-            <span>View architecture</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="card-expand">
-            <div class="mt-4 border-t border-subtle pt-4">
-              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="rounded-lg border border-subtle bg-base p-4">
-                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">User Experience</p>
-                  <p class="mt-2 text-sm text-muted">Frontend, BFF, CRUD Layer</p>
-                </div>
-                <div class="rounded-lg border border-subtle bg-base p-4">
-                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">AI & Orchestration</p>
-                  <p class="mt-2 text-sm text-muted">Model Serving, Prompt Orchestration, Search</p>
-                </div>
-                <div class="rounded-lg border border-subtle bg-base p-4">
-                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">Data Platform</p>
-                  <p class="mt-2 text-sm text-muted">Pipelines, Feature Store, Analytics</p>
-                </div>
-                <div class="rounded-lg border border-subtle bg-base p-4">
-                  <p class="text-xs font-semibold uppercase tracking-wider text-accent">Infrastructure</p>
-                  <p class="mt-2 text-sm text-muted">Compute, Storage, Auth, Monitoring</p>
-                </div>
-              </div>
-              <div class="mt-4 grid grid-cols-1 gap-3 text-sm text-muted sm:grid-cols-2">
-                <p><span class="text-slate-300 font-medium">Separation of concerns:</span> AI infra owned by data teams, UX owned by product teams.</p>
-                <p><span class="text-slate-300 font-medium">Rapid experimentation:</span> Containerized microservices for independent AI deployment.</p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CAREER ARC ===== -->
-  <section id="career" class="px-4 py-20 sm:px-6 lg:py-28">
-    <div class="mx-auto max-w-3xl">
-      <div class="fade-up text-center">
-        <p class="text-sm font-medium uppercase tracking-widest text-accent">Trajectory</p>
-        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">Career Arc</h2>
-        <p class="mx-auto mt-4 max-w-xl text-muted">
-          Engineering &rarr; Operations &rarr; Data &rarr; Product &rarr; AI
-        </p>
-      </div>
-
-      <div class="mt-14 space-y-0">
-        <!-- Timeline Item 1 -->
-        <div class="fade-up flex gap-6">
-          <div class="flex flex-col items-center">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line flex-1"></div>
-          </div>
-          <div class="pb-12">
-            <p class="text-xs font-medium uppercase tracking-wider text-accent">2018 &ndash; 2020</p>
-            <h3 class="mt-1 font-heading text-lg font-semibold">Industrial Operations & Procurement</h3>
-            <p class="mt-2 text-sm text-muted">Managed $200MM+ industrial portfolio across LATAM. Built the operational foundation&mdash;understanding supply chains, supplier strategy, and CAPEX investment at scale.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 2 -->
-        <div class="fade-up flex gap-6">
-          <div class="flex flex-col items-center">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line flex-1"></div>
-          </div>
-          <div class="pb-12">
-            <p class="text-xs font-medium uppercase tracking-wider text-accent">2020 &ndash; 2021</p>
-            <h3 class="mt-1 font-heading text-lg font-semibold">Data Platforms</h3>
-            <p class="mt-2 text-sm text-muted">Led 4 data engineering teams. Deployed 50+ production pipelines with &lt;1% failure rate. Scaled analytics adoption from 300 to 11,000 users (+3,000%). Created NPS measurement for internal platforms (NPS 80).</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 3 -->
-        <div class="fade-up flex gap-6">
-          <div class="flex flex-col items-center">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line flex-1"></div>
-          </div>
-          <div class="pb-12">
-            <p class="text-xs font-medium uppercase tracking-wider text-accent">2021 &ndash; 2024</p>
-            <h3 class="mt-1 font-heading text-lg font-semibold">Product Management &mdash; Fulfillment</h3>
-            <p class="mt-2 text-sm text-muted">Built fulfillment platform from 0 &rarr; production across 20 countries. Scaled flexible delivery from 20% to 85% of orders, generating R$25MM in annual revenue.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 4 -->
-        <div class="fade-up flex gap-6">
-          <div class="flex flex-col items-center">
-            <div class="timeline-dot" style="border-color: #22C55E; box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);"></div>
+        <div class="hero-enter mt-10 flex gap-10">
+          <div>
+            <p class="font-heading text-4xl font-bold text-accent">5</p>
+            <p class="mt-1 text-sm text-txt-muted">AI Products Shipped</p>
           </div>
           <div>
-            <p class="text-xs font-medium uppercase tracking-wider text-highlight">2025 &ndash; Present</p>
-            <h3 class="mt-1 font-heading text-lg font-semibold">AI & Enterprise Platforms</h3>
-            <p class="mt-2 text-sm text-muted">Group Product Manager leading AI-powered platforms across 20+ markets. Shipping generative AI for catalog, campaigns, operations, and partner tools serving 2M+ B2B customers.</p>
+            <p class="font-heading text-4xl font-bold text-accent">10+</p>
+            <p class="mt-1 text-sm text-txt-muted">Years of Impact</p>
           </div>
+        </div>
+      </div>
+      <div class="hero-svg-enter md:col-span-2 flex items-center justify-center">
+        <svg viewBox="0 0 400 400" class="w-full max-w-xs md:max-w-sm" aria-hidden="true">
+          <circle cx="200" cy="200" r="160" fill="#F0FDFA" />
+          <circle cx="200" cy="200" r="120" fill="none" stroke="#CCFBF1" stroke-width="2" stroke-dasharray="8 6" />
+          <circle cx="200" cy="200" r="80" fill="#CCFBF1" opacity="0.5" />
+          <circle cx="200" cy="200" r="40" fill="#0F766E" opacity="0.15" />
+          <circle cx="130" cy="120" r="8" fill="#0F766E" opacity="0.4" />
+          <circle cx="280" cy="140" r="6" fill="#14B8A6" opacity="0.5" />
+          <circle cx="300" cy="260" r="10" fill="#0F766E" opacity="0.3" />
+          <circle cx="110" cy="270" r="5" fill="#14B8A6" opacity="0.6" />
+          <circle cx="240" cy="90" r="4" fill="#0F766E" opacity="0.5" />
+          <circle cx="160" cy="310" r="7" fill="#14B8A6" opacity="0.35" />
+          <line x1="130" y1="120" x2="200" y2="200" stroke="#0F766E" stroke-width="1" opacity="0.15" />
+          <line x1="280" y1="140" x2="200" y2="200" stroke="#0F766E" stroke-width="1" opacity="0.15" />
+          <line x1="300" y1="260" x2="200" y2="200" stroke="#0F766E" stroke-width="1" opacity="0.15" />
+          <line x1="110" y1="270" x2="200" y2="200" stroke="#0F766E" stroke-width="1" opacity="0.15" />
+          <text x="200" y="195" text-anchor="middle" font-family="Outfit,sans-serif" font-size="18" font-weight="600" fill="#0F766E">AI</text>
+          <text x="200" y="215" text-anchor="middle" font-family="Work Sans,sans-serif" font-size="11" fill="#4A5568">systems</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. PERSONAL INTRO ===== -->
+  <section id="about" class="border-t border-gray-200 bg-white px-5 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal reveal-left">
+        <p class="max-w-3xl text-xl leading-relaxed text-txt sm:text-2xl">
+          <span class="font-heading font-bold">Hello, I'm Fábio</span> &mdash; an operations-turned-product leader who builds AI capabilities inside enterprise systems at scale.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 stagger">
+        <div class="reveal reveal-up">
+          <p class="font-heading text-lg font-bold text-accent">Builder</p>
+          <p class="mt-2 text-sm leading-relaxed text-txt-secondary">I design and ship AI products&mdash;image generation, catalog classification, operational copilots&mdash;inside platforms serving 2M+ B2B customers across 20+ markets.</p>
+        </div>
+        <div class="reveal reveal-up">
+          <p class="font-heading text-lg font-bold text-accent">Bridge</p>
+          <p class="mt-2 text-sm leading-relaxed text-txt-secondary">I sit between AI/data teams, product teams, and commercial stakeholders, ensuring everyone works from the same picture and AI actually reaches production.</p>
+        </div>
+        <div class="reveal reveal-up">
+          <p class="font-heading text-lg font-bold text-accent">Architect</p>
+          <p class="mt-2 text-sm leading-relaxed text-txt-secondary">I care about the system under the hood&mdash;layered architectures separating AI intelligence from user experience, designed for rapid experimentation without disrupting operations.</p>
+        </div>
+      </div>
+
+      <!-- Scrolling pills -->
+      <div class="mt-14 overflow-hidden reveal reveal-up">
+        <div class="pills-track flex w-max gap-3">
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">AI Product Strategy</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">GenAI Systems</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Data Pipelines</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Enterprise Platforms</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Catalog Management</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Campaign Automation</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Microservices</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Prompt Engineering</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Azure + Databricks</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Cross-Functional Leadership</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Python</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">SQL</span>
+          <!-- duplicate for seamless loop -->
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">AI Product Strategy</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">GenAI Systems</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Data Pipelines</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Enterprise Platforms</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Catalog Management</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Campaign Automation</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Microservices</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Prompt Engineering</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Azure + Databricks</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Cross-Functional Leadership</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">Python</span>
+          <span class="whitespace-nowrap rounded-full bg-accent-light px-4 py-1.5 text-xs font-medium text-accent">SQL</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== EDUCATION ===== -->
-  <section id="education" class="border-t border-subtle bg-surface/30 px-4 py-20 sm:px-6">
+  <!-- ===== 4. TESTIMONIAL #1 ===== -->
+  <section class="bg-accent-bg px-5 py-16 md:py-20">
+    <div class="reveal reveal-up mx-auto max-w-3xl text-center">
+      <svg class="mx-auto mb-6 text-accent" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 2.5C6.4 4.2 2.8 8.3 2.8 13.1c0 2.9 1.7 5.1 4.2 5.1 2.2 0 3.8-1.7 3.8-3.8 0-2-1.5-3.5-3.3-3.7.4-2.3 2.2-4.7 4.8-6l-1-2.2zm10.4 0c-4.9 1.7-8.5 5.8-8.5 10.6 0 2.9 1.7 5.1 4.2 5.1 2.2 0 3.8-1.7 3.8-3.8 0-2-1.5-3.5-3.3-3.7.4-2.3 2.2-4.7 4.8-6l-1-2.2z"/></svg>
+      <blockquote class="font-heading text-xl font-medium leading-relaxed text-txt sm:text-2xl">
+        "It follows the business rules very well. The descriptions and instructions are clear and contextual. I truly believe this tool can reduce the number of times partners reach out to us to resolve issues."
+      </blockquote>
+      <p class="mt-6 text-sm font-medium text-accent">Enterprise Platform User</p>
+      <p class="text-xs text-txt-muted">Operations Team</p>
+    </div>
+  </section>
+
+  <!-- ===== 5. CAPABILITIES ===== -->
+  <section id="capabilities" class="border-t border-gray-200 bg-white px-5 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal reveal-up">
+        <p class="text-xs font-semibold uppercase tracking-widest text-accent">Capabilities</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold text-txt sm:text-4xl">Where I'm most useful.</h2>
+        <p class="mt-3 max-w-xl text-txt-secondary">Most of my work falls into a few patterns. If you see yourself in one of these, let's talk.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 stagger">
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-default">
+          <h3 class="font-heading text-lg font-bold text-txt">AI Product Strategy & Leadership</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">When you need someone to turn AI experiments into production features, I build the frameworks&mdash;from MVP to scale&mdash;that let data teams and product teams ship together without stepping on each other.</p>
+        </div>
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-default">
+          <h3 class="font-heading text-lg font-bold text-txt">Platform Product Management</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">When your internal platforms serve 1,000+ users across 20+ markets, I own the user experience end-to-end&mdash;catalog management, content publishing, fulfillment config&mdash;making enterprise tools people actually want to use.</p>
+        </div>
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-default">
+          <h3 class="font-heading text-lg font-bold text-txt">Data & AI Architecture</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">When you have data but no AI in production, I design the layered systems&mdash;separating model serving from user experience&mdash;that let you experiment fast while keeping enterprise reliability.</p>
+        </div>
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-default">
+          <h3 class="font-heading text-lg font-bold text-txt">Automation & Operational Efficiency</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">When your teams run on manual processes, I build the pipelines and copilots that cut effort by 67%, automate audience selection, and turn 46-minute setups into 3-minute workflows.</p>
+        </div>
+      </div>
+
+      <div class="reveal reveal-up mt-10 text-center">
+        <a href="#contact" class="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Let's Connect</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. SELECTED WORKS ===== -->
+  <section id="works" class="border-t border-gray-200 bg-base px-5 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal reveal-up">
+        <p class="text-xs font-semibold uppercase tracking-widest text-accent">Selected Works</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold text-txt sm:text-4xl">What this looks like in practice.</h2>
+        <p class="mt-3 max-w-2xl text-txt-secondary">AI and platform initiatives I designed and led inside a Fortune 500 B2B ecosystem.</p>
+      </div>
+
+      <div class="mt-12 space-y-4 stagger" id="works-list">
+
+        <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-200 hover:bg-accent-bg">
+          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Producing campaign assets 50x cheaper and in 7 minutes</h3>
+            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="px-6 pb-6 pt-0">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Marketing assets for B2B campaigns were produced by external agencies&mdash;expensive, slow, impossible to personalize at scale.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">A way to generate compliant brand assets at scale from minimal inputs.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built an AI image generation pipeline through 8 development iterations&mdash;brand book extraction, reference images, multi-product composition, natural language post-editing.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What changed</p><p class="mt-1 text-sm text-txt-secondary"><span class="font-semibold text-accent">50x cost reduction.</span> Under 7 minutes per 3 iterations. Scalable personalization unlocked across markets.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-200 hover:bg-accent-bg">
+          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Turning 3 months of SKU onboarding into 2 weeks</h3>
+            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="px-6 pb-6 pt-0">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Millions of SKUs across multiple business units needed manual classification against a structured taxonomy. Years of backlog.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">AI-powered classification and enrichment pipeline at enterprise scale.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built pipeline that groups raw SKUs into structured product clusters, classifies against platform taxonomy, and auto-enriches product attributes.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What changed</p><p class="mt-1 text-sm text-txt-secondary"><span class="font-semibold text-accent">95% completeness, 98% brand accuracy.</span> 11k SKUs grouped into 860 structured products. Onboarding: 3 months to 2 weeks.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-200 hover:bg-accent-bg">
+          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Giving operations teams an AI teammate</h3>
+            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="px-6 pb-6 pt-0">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Platform users needed internal support to configure fulfillment settings, troubleshoot issues and understand platform features. Heavy dependency on support teams.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">A self-service AI assistant that follows business rules accurately and delivers clear, contextual guidance.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Developed GenAI copilot specialized in operational configuration&mdash;contextual Q&A, step-by-step troubleshooting, business rule compliance.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What changed</p><p class="mt-1 text-sm text-txt-secondary"><span class="font-semibold text-accent">~80% positive user feedback.</span> Partners resolving configuration issues autonomously. Reduced operational dependency.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-200 hover:bg-accent-bg">
+          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Automating 67% of campaign setup effort</h3>
+            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="px-6 pb-6 pt-0">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Campaign setup for digital communications involved multiple manual steps: strategy definition, audience selection, parametrization and platform integration.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">End-to-end automation pipeline from strategy input to delivery platform integration.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built pipeline: strategy ingestion, automated audience segmentation, platform-ready config generation, direct delivery platform integration.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What changed</p><p class="mt-1 text-sm text-txt-secondary"><span class="font-semibold text-accent">67% effort reduction.</span> 100% audience selection automated. 80% of campaigns fully automated end-to-end.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-200 hover:bg-accent-bg">
+          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Building the CMS that cut setup time from 46 minutes to 3</h3>
+            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="px-6 pb-6 pt-0">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Content publishing across global markets was painfully slow and fragmented across multiple tools and processes.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">Unified CMS + DAM experience for all global markets.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Delivered unified content publishing platform consolidating workflows, asset management, and multi-market configuration.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What changed</p><p class="mt-1 text-sm text-txt-secondary"><span class="font-semibold text-accent">46 minutes to 3 minutes</span> per content publication setup, deployed across all global markets.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up accordion-item rounded-2xl border border-gray-200 bg-white transition-colors duration-200 hover:bg-accent-bg">
+          <button class="accordion-btn flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading text-lg font-semibold text-txt pr-4">Scaling flexible delivery from 20% to 85% of orders</h3>
+            <span class="accordion-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-txt-muted transition-transform duration-300">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="px-6 pb-6 pt-0">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><p class="text-xs font-semibold uppercase text-accent">Context</p><p class="mt-1 text-sm text-txt-secondary">Fulfillment configuration needed to support both ABI and third-party partners across 20 countries with 100+ distribution centers.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What was needed</p><p class="mt-1 text-sm text-txt-secondary">Delivery platform from zero to production, integrated with the global B2B commerce app.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What I did</p><p class="mt-1 text-sm text-txt-secondary">Built delivery configuration microservices, inventory integration, delivery date logic. 100+ DDC integrations. Front-end discovery and development.</p></div>
+                <div><p class="text-xs font-semibold uppercase text-accent">What changed</p><p class="mt-1 text-sm text-txt-secondary"><span class="font-semibold text-accent">85% order adoption. R$25MM annual revenue.</span> 20 countries supported. Platform scaled for both ABI and partners.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="reveal reveal-up mt-10 text-center">
+        <a href="#contact" class="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Let's Connect</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. TESTIMONIAL #2 ===== -->
+  <section class="bg-accent-bg px-5 py-16 md:py-20">
+    <div class="reveal reveal-up mx-auto max-w-3xl text-center">
+      <svg class="mx-auto mb-6 text-accent" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 2.5C6.4 4.2 2.8 8.3 2.8 13.1c0 2.9 1.7 5.1 4.2 5.1 2.2 0 3.8-1.7 3.8-3.8 0-2-1.5-3.5-3.3-3.7.4-2.3 2.2-4.7 4.8-6l-1-2.2zm10.4 0c-4.9 1.7-8.5 5.8-8.5 10.6 0 2.9 1.7 5.1 4.2 5.1 2.2 0 3.8-1.7 3.8-3.8 0-2-1.5-3.5-3.3-3.7.4-2.3 2.2-4.7 4.8-6l-1-2.2z"/></svg>
+      <blockquote class="font-heading text-xl font-medium leading-relaxed text-txt sm:text-2xl">
+        "I was asked to make a configuration adjustment affecting thousands of points of sale&mdash;I could make the adjustment thanks to the copilot."
+      </blockquote>
+      <p class="mt-6 text-sm font-medium text-accent">Partner Operations Specialist</p>
+      <p class="text-xs text-txt-muted">Enterprise B2B Platform</p>
+    </div>
+  </section>
+
+  <!-- ===== 8. APPROACH ===== -->
+  <section id="approach" class="border-t border-gray-200 bg-white px-5 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="reveal reveal-up">
+        <p class="text-xs font-semibold uppercase tracking-widest text-accent">Approach</p>
+        <h2 class="mt-3 font-heading text-3xl font-bold text-txt sm:text-4xl">How I introduce AI into enterprise systems.</h2>
+        <p class="mt-3 max-w-2xl text-txt-secondary">A structured framework for proving value fast without disrupting operations.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3 stagger">
+        <div class="reveal reveal-right">
+          <p class="font-heading text-5xl font-bold text-accent/20">01</p>
+          <h3 class="mt-2 font-heading text-xl font-bold text-txt">Design & Experiment</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">It starts with what hurts. I map the current process, identify where AI can replace manual work, and build a focused experiment in ~2 weeks to prove the hypothesis before touching production.</p>
+        </div>
+        <div class="reveal reveal-right">
+          <p class="font-heading text-5xl font-bold text-accent/20">02</p>
+          <h3 class="mt-2 font-heading text-xl font-bold text-txt">Validate & Incubate</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">Next, I test with real users and real data. The PoC gets refined over ~6 weeks, measuring actual value capture. Go/No-Go gates ensure we only continue what works.</p>
+        </div>
+        <div class="reveal reveal-right">
+          <p class="font-heading text-5xl font-bold text-accent/20">03</p>
+          <h3 class="mt-2 font-heading text-xl font-bold text-txt">Realize & Scale</h3>
+          <p class="mt-3 text-sm leading-relaxed text-txt-secondary">Once validated, I run the change management to make it sustainable, then enable the solution as a platform-level feature. Clear handover, documentation, KPI tracking.</p>
+        </div>
+      </div>
+
+      <div class="reveal reveal-up mt-10 text-center">
+        <a href="#contact" class="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Let's Connect</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 9. TESTIMONIAL #3 ===== -->
+  <section class="bg-accent-bg px-5 py-16 md:py-20">
+    <div class="reveal reveal-up mx-auto max-w-3xl text-center">
+      <svg class="mx-auto mb-6 text-accent" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 2.5C6.4 4.2 2.8 8.3 2.8 13.1c0 2.9 1.7 5.1 4.2 5.1 2.2 0 3.8-1.7 3.8-3.8 0-2-1.5-3.5-3.3-3.7.4-2.3 2.2-4.7 4.8-6l-1-2.2zm10.4 0c-4.9 1.7-8.5 5.8-8.5 10.6 0 2.9 1.7 5.1 4.2 5.1 2.2 0 3.8-1.7 3.8-3.8 0-2-1.5-3.5-3.3-3.7.4-2.3 2.2-4.7 4.8-6l-1-2.2z"/></svg>
+      <blockquote class="font-heading text-xl font-medium leading-relaxed text-txt sm:text-2xl">
+        "I've been using the Copilot and it's been helping me a lot. I'll keep using it a lot!"
+      </blockquote>
+      <p class="mt-6 text-sm font-medium text-accent">Operations Team Lead</p>
+      <p class="text-xs text-txt-muted">Platform User</p>
+    </div>
+  </section>
+
+  <!-- ===== 10. WORK EXPERIENCE ===== -->
+  <section id="experience" class="border-t border-gray-200 bg-white px-5 py-16 md:py-24">
     <div class="mx-auto max-w-3xl">
-      <div class="fade-up text-center">
-        <p class="text-sm font-medium uppercase tracking-widest text-accent">Education</p>
-        <h2 class="mt-3 font-heading text-3xl font-bold sm:text-4xl">Academic Background</h2>
+      <div class="reveal reveal-up">
+        <h2 class="font-heading text-3xl font-bold text-txt sm:text-4xl">My work experience</h2>
       </div>
 
-      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div class="fade-up rounded-xl border border-subtle bg-surface p-6">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-highlight/10 text-highlight">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+      <div class="mt-12 stagger">
+
+        <!-- Entry 1 -->
+        <div class="reveal reveal-left flex gap-5">
+          <div class="flex flex-col items-center">
+            <div class="tl-dot" style="border-color:#14B8A6; box-shadow:0 0 8px rgba(20,184,166,0.3);"></div>
+            <div class="tl-line flex-1"></div>
           </div>
-          <h3 class="mt-4 font-heading text-lg font-semibold">MBA in Data & AI</h3>
-          <p class="mt-1 text-sm text-muted">Inteli &mdash; Institute of Technology and Leadership</p>
-          <p class="mt-2 text-xs text-accent font-medium">2025 &ndash; Present</p>
+          <div class="pb-10">
+            <h3 class="font-heading text-lg font-bold text-txt">AB InBev (BEES One)</h3>
+            <p class="text-sm font-medium text-accent">Group Product Manager &mdash; Internal Platforms & AI</p>
+            <p class="mt-1 text-xs text-txt-muted">S&atilde;o Paulo, BR &bull; 2025 &ndash; Present</p>
+            <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+              <li>&bull; Leading Content Admin, Catalog Admin and Company Admin platforms used by 1,000+ users across 20+ markets managing digital stores for 2M+ B2B customers.</li>
+              <li>&bull; Built the first AI-powered product classification pipeline, reducing SKU onboarding from 3 months to 2 weeks with 95% completeness and 98% brand accuracy.</li>
+            </ul>
+            <button class="exp-toggle mt-3 text-sm font-medium text-accent transition-colors duration-200 hover:text-accent-hover cursor-pointer">Read more...</button>
+            <div class="accordion-body">
+              <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+                <li>&bull; Implemented GenAI-driven asset generation for marketing campaigns, producing content in minutes and reducing production costs by up to 50x.</li>
+                <li>&bull; Developed AI Copilot for operational tools, enabling partners to troubleshoot configuration issues autonomously.</li>
+                <li>&bull; Designed the BEES One AI experimentation framework, enabling rapid MVP development and scaling of AI features.</li>
+                <li>&bull; Delivered unified CMS + DAM platform, reducing content publication setup time from 46 minutes to 3 minutes.</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="fade-up rounded-xl border border-subtle bg-surface p-6">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+
+        <!-- Entry 2 -->
+        <div class="reveal reveal-left flex gap-5">
+          <div class="flex flex-col items-center">
+            <div class="tl-dot"></div>
+            <div class="tl-line flex-1"></div>
           </div>
-          <h3 class="mt-4 font-heading text-lg font-semibold">Chemical Engineering</h3>
-          <p class="mt-1 text-sm text-muted">University of S&atilde;o Paulo (USP) &mdash; Polytechnic School</p>
-          <p class="mt-2 text-xs text-accent font-medium">2017</p>
+          <div class="pb-10">
+            <h3 class="font-heading text-lg font-bold text-txt">AB InBev (BEES)</h3>
+            <p class="text-sm font-medium text-accent">Logistics Product Manager &mdash; Fulfillment Platform</p>
+            <p class="mt-1 text-xs text-txt-muted">S&atilde;o Paulo, BR &bull; 2021 &ndash; 2024</p>
+            <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+              <li>&bull; Product Owner of Delivery Convenience&mdash;microservice integrating delivery dates for 2M+ customers in the BEES App.</li>
+              <li>&bull; Built delivery configuration from 0 to production, 100+ DDC integrations across markets.</li>
+            </ul>
+            <button class="exp-toggle mt-3 text-sm font-medium text-accent transition-colors duration-200 hover:text-accent-hover cursor-pointer">Read more...</button>
+            <div class="accordion-body">
+              <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+                <li>&bull; Enabled BR Zone to grow from 20% to 85% flexible delivery adoption in BEES online orders.</li>
+                <li>&bull; Generated R$25MM in annual fee revenue from flexible delivery in 2022.</li>
+                <li>&bull; Front-end discovery and development for the delivery configuration experience.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 3 -->
+        <div class="reveal reveal-left flex gap-5">
+          <div class="flex flex-col items-center">
+            <div class="tl-dot"></div>
+            <div class="tl-line flex-1"></div>
+          </div>
+          <div class="pb-10">
+            <h3 class="font-heading text-lg font-bold text-txt">AB InBev</h3>
+            <p class="text-sm font-medium text-accent">Data Product Manager &mdash; Logistics</p>
+            <p class="mt-1 text-xs text-txt-muted">S&atilde;o Paulo, BR &bull; 2020 &ndash; 2021</p>
+            <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+              <li>&bull; Coordinated 4 data engineering teams building pipelines using Azure + Databricks.</li>
+              <li>&bull; Grew analytics user base from 300 to 11,000 users (+3,000%).</li>
+            </ul>
+            <button class="exp-toggle mt-3 text-sm font-medium text-accent transition-colors duration-200 hover:text-accent-hover cursor-pointer">Read more...</button>
+            <div class="accordion-body">
+              <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+                <li>&bull; Deployed 50+ production data pipelines supporting operational analytics.</li>
+                <li>&bull; Implemented PowerBI governance model and automated reporting infrastructure.</li>
+                <li>&bull; Introduced NPS measurement for internal data platforms (NPS 80).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 4 -->
+        <div class="reveal reveal-left flex gap-5">
+          <div class="flex flex-col items-center">
+            <div class="tl-dot"></div>
+          </div>
+          <div>
+            <h3 class="font-heading text-lg font-bold text-txt">AB InBev</h3>
+            <p class="text-sm font-medium text-accent">Corporate Trainee &mdash; Procurement</p>
+            <p class="mt-1 text-xs text-txt-muted">S&atilde;o Paulo, BR &bull; 2018 &ndash; 2020</p>
+            <ul class="mt-3 space-y-2 text-sm text-txt-secondary">
+              <li>&bull; Responsible for SPOT purchases across 200+ business units in Brazil.</li>
+              <li>&bull; Developed Spot Buyer automation toolkit, from request to purchase order creation.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 11. EDUCATION ===== -->
+  <section class="border-t border-gray-200 bg-base px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="reveal reveal-up">
+        <p class="text-xs font-semibold uppercase tracking-widest text-accent">Education</p>
+      </div>
+      <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 stagger">
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6">
+          <h3 class="font-heading text-lg font-bold text-txt">MBA in Data & AI</h3>
+          <p class="mt-1 text-sm text-txt-secondary">Inteli &mdash; Institute of Technology and Leadership</p>
+          <p class="mt-2 text-xs font-medium text-accent">2025 &ndash; Present</p>
+        </div>
+        <div class="reveal reveal-up rounded-2xl border border-gray-200 bg-white p-6">
+          <h3 class="font-heading text-lg font-bold text-txt">Chemical Engineering</h3>
+          <p class="mt-1 text-sm text-txt-secondary">University of S&atilde;o Paulo (USP) &mdash; Polytechnic School</p>
+          <p class="mt-2 text-xs font-medium text-accent">2017</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER / CONTACT ===== -->
-  <footer id="contact" class="border-t border-subtle px-4 py-20 sm:px-6">
-    <div class="mx-auto max-w-3xl text-center">
-      <div class="fade-up">
-        <h2 class="font-heading text-3xl font-bold sm:text-4xl">Let's connect</h2>
-        <p class="mt-4 text-muted">
-          Open to conversations about AI product strategy, enterprise platform design, and new opportunities.
-        </p>
+  <!-- ===== FOOTER ===== -->
+  <footer id="contact" class="border-t border-gray-200 bg-white px-5 py-16 md:py-20">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid grid-cols-1 items-start gap-10 md:grid-cols-2">
+        <div class="reveal reveal-up">
+          <a href="#hero" class="font-heading text-xl font-bold cursor-pointer">
+            <span class="text-accent">Fábio</span> <span class="text-txt">Oliveira.</span>
+          </a>
+          <div class="mt-6 flex flex-col gap-3">
+            <a href="#about" class="text-sm text-txt-muted hover:text-accent cursor-pointer transition-colors duration-150">About</a>
+            <a href="#works" class="text-sm text-txt-muted hover:text-accent cursor-pointer transition-colors duration-150">My Work</a>
+            <a href="#contact" class="text-sm text-txt-muted hover:text-accent cursor-pointer transition-colors duration-150">Contact Me</a>
+          </div>
+        </div>
+        <div class="reveal reveal-up text-left md:text-right">
+          <h2 class="font-heading text-3xl font-bold text-txt sm:text-4xl">
+            Let's build something <span class="text-accent">impactful</span> together
+          </h2>
+          <div class="mt-6 flex flex-wrap gap-3 md:justify-end">
+            <a href="mailto:fabiosouzao13@gmail.com" class="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Get in Touch</a>
+            <a href="https://www.linkedin.com/in/fabiosolivei/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-3 text-sm font-medium text-txt-secondary transition-all duration-200 hover:border-accent hover:text-accent hover:-translate-y-0.5 cursor-pointer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/fabiosolivei" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-3 text-sm font-medium text-txt-secondary transition-all duration-200 hover:border-accent hover:text-accent hover:-translate-y-0.5 cursor-pointer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
       </div>
-
-      <div class="fade-up mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a href="mailto:fabiosouzao13@gmail.com" class="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-blue-600 hover:-translate-y-0.5 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          Get in Touch
-        </a>
-        <a href="https://www.linkedin.com/in/fabiosolivei/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-subtle px-6 py-3 font-medium text-slate-300 transition-all duration-200 hover:border-accent hover:text-white hover:-translate-y-0.5 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/fabiosolivei" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-lg border border-subtle px-6 py-3 font-medium text-slate-300 transition-all duration-200 hover:border-accent hover:text-white hover:-translate-y-0.5 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-          GitHub
-        </a>
-      </div>
-
-      <div class="mt-16 border-t border-subtle pt-8">
-        <p class="text-sm text-muted">
-          &copy; 2025&ndash;2026 F&aacute;bio Oliveira. Built with precision.
-        </p>
+      <div class="mt-12 border-t border-gray-200 pt-6 text-center">
+        <p class="text-xs text-txt-muted">&copy; 2025&ndash;2026 F&aacute;bio Oliveira. Built with precision.</p>
       </div>
     </div>
   </footer>
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
-    // Scroll-triggered fade-in animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
+    // ── Cinematic scroll reveals (Progano-style) ──
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ── Smooth accordion (measure real height) ──
+    function toggleAccordion(body, open) {
+      if (open) {
+        body.style.height = body.scrollHeight + 'px';
+        body.classList.add('open');
+        body.addEventListener('transitionend', function handler() {
+          if (body.classList.contains('open')) body.style.height = 'auto';
+          body.removeEventListener('transitionend', handler);
         });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
+      } else {
+        body.style.height = body.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          body.style.height = '0';
+          body.classList.remove('open');
+        });
+      }
+    }
 
-    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-
-    // Card expand/collapse
-    document.querySelectorAll('.card-toggle').forEach((btn) => {
-      const originalText = btn.querySelector('span').textContent;
-      const hideText = originalText.replace('View', 'Hide');
+    // Selected Works accordion
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const expandable = btn.closest('article').querySelector('.card-expand');
-        const chevron = btn.querySelector('svg');
-        const isOpen = expandable.classList.toggle('open');
+        const item = btn.closest('.accordion-item');
+        const body = item.querySelector('.accordion-body');
+        const icon = btn.querySelector('.accordion-icon');
+        const isOpen = !body.classList.contains('open');
         btn.setAttribute('aria-expanded', isOpen);
-        chevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-        btn.querySelector('span').textContent = isOpen ? hideText : originalText;
+        icon.style.transform = isOpen ? 'rotate(45deg)' : 'rotate(0deg)';
+        toggleAccordion(body, isOpen);
       });
     });
 
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // Close mobile menu on link click
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
+    // Experience timeline Read more / Hide
+    document.querySelectorAll('.exp-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body = btn.nextElementSibling;
+        const isOpen = !body.classList.contains('open');
+        btn.textContent = isOpen ? 'Hide' : 'Read more...';
+        toggleAccordion(body, isOpen);
       });
     });
 
-    // Active nav highlighting on scroll
+    // ── Mobile menu ──
+    const mobBtn = document.getElementById('mob-btn');
+    const mobMenu = document.getElementById('mob-menu');
+    mobBtn.addEventListener('click', () => mobMenu.classList.toggle('hidden'));
+    mobMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobMenu.classList.add('hidden')));
+
+    // ── Active nav link highlighting ──
     const sections = document.querySelectorAll('section[id], footer[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((link) => {
-              link.classList.remove('text-slate-50');
-              if (link.getAttribute('href') === '#' + entry.target.id) {
-                link.classList.add('text-slate-50');
-              }
-            });
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    sections.forEach((section) => navObserver.observe(section));
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => {
+            l.classList.remove('!text-accent');
+            if (l.getAttribute('href') === '#' + e.target.id) l.classList.add('!text-accent');
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(s => navObs.observe(s));
   </script>
 
 </body>

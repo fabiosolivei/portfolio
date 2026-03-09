@@ -143,8 +143,8 @@
       <div class="hidden items-center gap-8 md:flex">
         <a href="#about" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">About</a>
         <a href="#works" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Works</a>
-        <a href="#experience" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Experience</a>
         <a href="#approach" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Approach</a>
+        <a href="#experience" class="text-sm text-txt-muted transition-colors duration-150 hover:text-accent cursor-pointer">Experience</a>
         <a href="#contact" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Get in Touch</a>
       </div>
       <button id="mob-btn" class="md:hidden cursor-pointer text-txt-muted hover:text-accent transition-colors duration-150" aria-label="Menu">
@@ -155,8 +155,8 @@
       <div class="flex flex-col gap-4">
         <a href="#about" class="text-sm text-txt-muted hover:text-accent cursor-pointer">About</a>
         <a href="#works" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Works</a>
-        <a href="#experience" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Experience</a>
         <a href="#approach" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Approach</a>
+        <a href="#experience" class="text-sm text-txt-muted hover:text-accent cursor-pointer">Experience</a>
         <a href="#contact" class="rounded-full bg-accent px-5 py-2.5 text-center text-sm font-medium text-white cursor-pointer">Get in Touch</a>
       </div>
     </div>
@@ -735,7 +735,7 @@
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
         const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0 }); }
+        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -80 }); }
       });
     });
 

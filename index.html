@@ -27,7 +27,7 @@
           },
           colors: {
             accent: { DEFAULT: '#0F766E', hover: '#14B8A6', light: '#CCFBF1', bg: '#F0FDFA' },
-            base: '#F8FAFB',
+            surface: '#F8FAFB',
             txt: { DEFAULT: '#1A202C', secondary: '#4A5568', muted: '#718096' },
           },
         },
@@ -157,10 +157,91 @@
     /* ── Timeline ── */
     .tl-dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid #0F766E; background: #F8FAFB; flex-shrink: 0; z-index: 1; }
     .tl-line { width: 2px; background: #E2E8F0; flex-shrink: 0; }
+
+    /* ── Hero image swap (SteviaPlease multi-bar horizontal wipe) ── */
+    .hero-crossfade {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
+      -webkit-mask-composite: destination-in;
+      mask-image: linear-gradient(to right, transparent 0%, black 25%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
+      mask-composite: intersect;
+    }
+    .hero-crossfade img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-crossfade .img-b {
+      transform: scale(1.12);
+    }
+    .hero-crossfade .img-a { animation: imgA 10s linear infinite; }
+    .hero-crossfade .img-b { animation: imgB 10s linear infinite; }
+    @keyframes imgA {
+      0%, 41%    { opacity: 1; }
+      42%, 91%   { opacity: 0; }
+      92%, 100%  { opacity: 1; }
+    }
+    @keyframes imgB {
+      0%, 41%    { opacity: 0; }
+      42%, 91%   { opacity: 1; }
+      92%, 100%  { opacity: 0; }
+    }
+
+    .wipe-bars {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      pointer-events: none;
+    }
+    .wipe-bars span {
+      flex: 1;
+      animation: wipeBar 10s ease-in-out infinite;
+    }
+    .wipe-bars span:nth-child(1) { background: #E6FAF8; animation-delay: 0s; }
+    .wipe-bars span:nth-child(2) { background: #99F6E4; animation-delay: 0.06s; }
+    .wipe-bars span:nth-child(3) { background: #5EEAD4; animation-delay: 0.12s; }
+    .wipe-bars span:nth-child(4) { background: #14B8A6; animation-delay: 0.18s; }
+    .wipe-bars span:nth-child(5) { background: #0F766E; animation-delay: 0.24s; }
+    @keyframes wipeBar {
+      0%, 35%  { transform: translateX(-102%); }
+      48%      { transform: translateX(102%); }
+      50%, 85% { transform: translateX(102%); }
+      98%      { transform: translateX(-102%); }
+      100%     { transform: translateX(-102%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-crossfade .img-a,
+      .hero-crossfade .img-b { animation: none !important; opacity: 1 !important; }
+      .hero-crossfade .img-b { opacity: 0 !important; }
+      .wipe-bars span { animation: none !important; transform: translateX(-102%) !important; }
+      .hero-bg-shapes * { animation: none !important; }
+    }
+
+    /* ── Hero animated SVG background ── */
+    .hero-bg-shapes {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    @keyframes floatA { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(18px,-22px) rotate(8deg); } }
+    @keyframes floatB { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-22px,16px) rotate(-6deg); } }
+    @keyframes floatC { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(12px,18px) rotate(5deg); } }
+    @keyframes floatD { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-15px,-12px) rotate(-4deg); } }
   </style>
 </head>
 
-<body class="bg-base text-txt antialiased">
+<body class="bg-surface text-txt antialiased">
 
   <!-- ===== 1. NAVIGATION ===== -->
   <nav class="nav-enter fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md">
@@ -194,7 +275,7 @@
   <section id="hero" class="px-5 pt-28 pb-16 md:pt-36 md:pb-24">
     <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-5">
       <div class="md:col-span-3">
-        <p class="hero-enter text-sm font-medium text-txt-muted">Build with confidence. Ship with clarity.</p>
+        <p class="hero-enter font-heading text-2xl font-bold text-accent sm:text-3xl">Hi, I'm F&aacute;bio</p>
         <h1 class="hero-enter mt-4 font-heading text-4xl font-bold leading-tight text-txt sm:text-5xl lg:text-[3.5rem] lg:leading-[1.15]">
           I build AI capabilities inside systems that actually run the business.
         </h1>
@@ -216,9 +297,13 @@
           </div>
         </div>
       </div>
-      <div class="hero-svg-enter md:col-span-2 flex items-center justify-center">
-        <div class="w-full max-w-xs md:max-w-sm overflow-hidden rounded-2xl shadow-lg">
-          <img src="ai-ecosystem.png" alt="Product Manager's AI Ecosystem — User Insights, Tech Scaling, Business Impact, Roadmap Alignment" class="w-full h-auto object-cover object-bottom" style="margin-top: -8%;">
+      <div class="hero-svg-enter md:col-span-2 flex items-center justify-end md:mr-[-2rem]">
+        <div class="w-full max-w-sm md:max-w-lg">
+          <div class="hero-crossfade">
+            <img src="ai-ecosystem.png" alt="AI Ecosystem — User Insights, Tech Scaling, Business Impact, Roadmap Alignment" class="img-a">
+            <img src="img/fabio-portrait.png" alt="F&aacute;bio Oliveira" class="img-b">
+            <div class="wipe-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -229,7 +314,7 @@
     <div class="mx-auto max-w-6xl">
       <div class="reveal reveal-left">
         <p class="max-w-3xl text-xl leading-relaxed text-txt sm:text-2xl">
-          <span class="font-heading font-bold">Hello, I'm Fábio</span> &mdash; an operations-turned-product leader who builds AI capabilities inside enterprise systems at scale.
+          A business-turned-product leader who builds <span class="font-heading font-bold text-accent">AI capabilities</span> inside enterprise systems at scale.
         </p>
       </div>
 
@@ -351,7 +436,7 @@
   </section>
 
   <!-- ===== 6. SELECTED WORKS ===== -->
-  <section id="works" class="border-t border-gray-200 bg-base px-5 py-16 md:py-24">
+  <section id="works" class="border-t border-gray-200 bg-surface px-5 py-16 md:py-24">
     <div class="mx-auto max-w-6xl">
       <div class="reveal reveal-up">
         <p class="text-xs font-semibold uppercase tracking-widest text-accent">Selected Works</p>
@@ -625,8 +710,16 @@
   </section>
 
   <!-- ===== 8. APPROACH ===== -->
-  <section id="approach" class="border-t border-gray-200 bg-white px-5 py-16 md:py-24">
-    <div class="mx-auto max-w-6xl">
+  <section id="approach" class="relative overflow-hidden border-t border-gray-200 bg-white px-5 py-16 md:py-24">
+    <svg class="hero-bg-shapes" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polygon points="120,80 200,40 250,100 220,180 140,170" fill="#CCFBF1" opacity="0.45" style="animation: floatA 28s ease-in-out infinite;"/>
+      <polygon points="900,20 970,0 1010,50 990,110 920,105" fill="#99F6E4" opacity="0.3" style="animation: floatB 34s ease-in-out infinite;"/>
+      <polygon points="50,450 160,400 190,500 110,540" fill="#5EEAD4" opacity="0.15" style="animation: floatC 24s ease-in-out infinite;"/>
+      <circle cx="1300" cy="180" r="60" fill="#0F766E" opacity="0.05" style="animation: floatD 30s ease-in-out infinite;"/>
+      <circle cx="350" cy="600" r="12" fill="#14B8A6" opacity="0.2" style="animation: floatA 22s ease-in-out infinite;"/>
+      <polygon points="1100,500 1180,520 1150,600" fill="#CCFBF1" opacity="0.25" style="animation: floatB 26s ease-in-out infinite;"/>
+    </svg>
+    <div class="relative z-10 mx-auto max-w-6xl">
       <div class="reveal reveal-up">
         <p class="text-xs font-semibold uppercase tracking-widest text-accent">Approach</p>
         <h2 class="mt-3 font-heading text-3xl font-bold text-txt sm:text-4xl">How I introduce AI into enterprise systems.</h2>
@@ -775,7 +868,7 @@
   </section>
 
   <!-- ===== 11. EDUCATION ===== -->
-  <section class="border-t border-gray-200 bg-base px-5 py-16 md:py-20">
+  <section class="border-t border-gray-200 bg-surface px-5 py-16 md:py-20">
     <div class="mx-auto max-w-3xl">
       <div class="reveal reveal-up">
         <p class="text-xs font-semibold uppercase tracking-widest text-accent">Education</p>
@@ -882,6 +975,7 @@
     }
     window.addEventListener('load', () => { revealVisibleNow(); requestAnimationFrame(revealVisibleNow); });
     document.fonts.ready.then(() => { revealVisibleNow(); requestAnimationFrame(revealVisibleNow); });
+    lenis.on('scroll', () => { revealVisibleNow(); });
 
     // ── Smooth accordion (measure real height) ──
     function toggleAccordion(body, open) {
@@ -928,7 +1022,17 @@
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
         const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -56 }); }
+        if (target) {
+          e.preventDefault();
+          lenis.scrollTo(target, {
+            offset: -56,
+            onComplete: () => {
+              revealVisibleNow();
+              requestAnimationFrame(revealVisibleNow);
+              setTimeout(revealVisibleNow, 100);
+            }
+          });
+        }
       });
     });
 

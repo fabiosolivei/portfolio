@@ -158,9 +158,8 @@
     .tl-dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid #0F766E; background: #F8FAFB; flex-shrink: 0; z-index: 1; }
     .tl-line { width: 2px; background: #E2E8F0; flex-shrink: 0; }
 
-    /* ── Hero image swap (SteviaPlease multi-bar horizontal wipe) ── */
-    .hero-crossfade {
-      position: relative;
+    /* ── Hero portrait (static, soft-edge mask) ── */
+    .hero-portrait {
       aspect-ratio: 1 / 1;
       overflow: hidden;
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
@@ -168,59 +167,13 @@
       mask-image: linear-gradient(to right, transparent 0%, black 25%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%);
       mask-composite: intersect;
     }
-    .hero-crossfade img {
-      position: absolute;
-      inset: 0;
+    .hero-portrait img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .hero-crossfade .img-b {
-      transform: scale(1.12);
-    }
-    .hero-crossfade .img-a { animation: imgA 10s linear infinite; }
-    .hero-crossfade .img-b { animation: imgB 10s linear infinite; }
-    @keyframes imgA {
-      0%, 41%    { opacity: 1; }
-      42%, 91%   { opacity: 0; }
-      92%, 100%  { opacity: 1; }
-    }
-    @keyframes imgB {
-      0%, 41%    { opacity: 0; }
-      42%, 91%   { opacity: 1; }
-      92%, 100%  { opacity: 0; }
-    }
-
-    .wipe-bars {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      pointer-events: none;
-    }
-    .wipe-bars span {
-      flex: 1;
-      animation: wipeBar 10s ease-in-out infinite;
-    }
-    .wipe-bars span:nth-child(1) { background: #E6FAF8; animation-delay: 0s; }
-    .wipe-bars span:nth-child(2) { background: #99F6E4; animation-delay: 0.06s; }
-    .wipe-bars span:nth-child(3) { background: #5EEAD4; animation-delay: 0.12s; }
-    .wipe-bars span:nth-child(4) { background: #14B8A6; animation-delay: 0.18s; }
-    .wipe-bars span:nth-child(5) { background: #0F766E; animation-delay: 0.24s; }
-    @keyframes wipeBar {
-      0%, 35%  { transform: translateX(-102%); }
-      48%      { transform: translateX(102%); }
-      50%, 85% { transform: translateX(102%); }
-      98%      { transform: translateX(-102%); }
-      100%     { transform: translateX(-102%); }
-    }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-crossfade .img-a,
-      .hero-crossfade .img-b { animation: none !important; opacity: 1 !important; }
-      .hero-crossfade .img-b { opacity: 0 !important; }
-      .wipe-bars span { animation: none !important; transform: translateX(-102%) !important; }
       .hero-bg-shapes * { animation: none !important; }
     }
 
@@ -299,10 +252,8 @@
       </div>
       <div class="hero-svg-enter md:col-span-2 flex items-center justify-end md:mr-[-2rem]">
         <div class="w-full max-w-sm md:max-w-lg">
-          <div class="hero-crossfade">
-            <img src="ai-ecosystem.png" alt="AI Ecosystem — User Insights, Tech Scaling, Business Impact, Roadmap Alignment" class="img-a">
-            <img src="img/fabio-portrait.png" alt="F&aacute;bio Oliveira" class="img-b">
-            <div class="wipe-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="hero-portrait">
+            <img src="img/fabio-portrait.png" alt="F&aacute;bio Oliveira">
           </div>
         </div>
       </div>
@@ -711,13 +662,31 @@
 
   <!-- ===== 8. APPROACH ===== -->
   <section id="approach" class="relative overflow-hidden border-t border-gray-200 bg-white px-5 py-16 md:py-24">
-    <svg class="hero-bg-shapes" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <polygon points="120,80 200,40 250,100 220,180 140,170" fill="#CCFBF1" opacity="0.45" style="animation: floatA 28s ease-in-out infinite;"/>
-      <polygon points="900,20 970,0 1010,50 990,110 920,105" fill="#99F6E4" opacity="0.3" style="animation: floatB 34s ease-in-out infinite;"/>
-      <polygon points="50,450 160,400 190,500 110,540" fill="#5EEAD4" opacity="0.15" style="animation: floatC 24s ease-in-out infinite;"/>
-      <circle cx="1300" cy="180" r="60" fill="#0F766E" opacity="0.05" style="animation: floatD 30s ease-in-out infinite;"/>
-      <circle cx="350" cy="600" r="12" fill="#14B8A6" opacity="0.2" style="animation: floatA 22s ease-in-out infinite;"/>
-      <polygon points="1100,500 1180,520 1150,600" fill="#CCFBF1" opacity="0.25" style="animation: floatB 26s ease-in-out infinite;"/>
+    <svg class="hero-bg-shapes" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Large ambient fills -->
+      <circle cx="250" cy="150" r="100" fill="#CCFBF1" opacity="0.18" style="animation: floatA 30s ease-in-out infinite;"/>
+      <circle cx="1200" cy="300" r="120" fill="#F0FDFA" opacity="0.20" style="animation: floatC 34s ease-in-out infinite;"/>
+      <circle cx="400" cy="750" r="90" fill="#CCFBF1" opacity="0.15" style="animation: floatD 28s ease-in-out infinite;"/>
+      <circle cx="1050" cy="800" r="80" fill="#99F6E4" opacity="0.12" style="animation: floatB 32s ease-in-out infinite;"/>
+      <!-- Rings / orbits — around center & image area -->
+      <circle cx="720" cy="620" r="110" fill="none" stroke="#14B8A6" stroke-width="1.5" stroke-dasharray="8 12" opacity="0.15" style="animation: floatA 36s ease-in-out infinite;"/>
+      <circle cx="350" cy="400" r="70" fill="none" stroke="#5EEAD4" stroke-width="1.2" stroke-dasharray="5 9" opacity="0.18" style="animation: floatB 30s ease-in-out infinite;"/>
+      <circle cx="1100" cy="550" r="55" fill="none" stroke="#0F766E" stroke-width="1.5" opacity="0.12" style="animation: floatD 26s ease-in-out infinite;"/>
+      <circle cx="900" cy="120" r="40" fill="none" stroke="#14B8A6" stroke-width="1" stroke-dasharray="4 8" opacity="0.14" style="animation: floatC 28s ease-in-out infinite;"/>
+      <!-- Medium circles -->
+      <circle cx="550" cy="200" r="22" fill="#99F6E4" opacity="0.25" style="animation: floatC 24s ease-in-out infinite;"/>
+      <circle cx="180" cy="500" r="18" fill="#5EEAD4" opacity="0.22" style="animation: floatB 22s ease-in-out infinite;"/>
+      <circle cx="1300" cy="150" r="15" fill="#CCFBF1" opacity="0.28" style="animation: floatA 20s ease-in-out infinite;"/>
+      <circle cx="850" cy="900" r="20" fill="#99F6E4" opacity="0.20" style="animation: floatD 26s ease-in-out infinite;"/>
+      <circle cx="1250" cy="700" r="16" fill="#5EEAD4" opacity="0.22" style="animation: floatA 24s ease-in-out infinite;"/>
+      <!-- Small dots — scattered everywhere -->
+      <circle cx="480" cy="380" r="5" fill="#14B8A6" opacity="0.35" style="animation: floatA 22s ease-in-out infinite;"/>
+      <circle cx="960" cy="450" r="4" fill="#0F766E" opacity="0.30" style="animation: floatC 26s ease-in-out infinite;"/>
+      <circle cx="300" cy="680" r="5" fill="#14B8A6" opacity="0.32" style="animation: floatB 20s ease-in-out infinite;"/>
+      <circle cx="1150" cy="250" r="4" fill="#5EEAD4" opacity="0.30" style="animation: floatD 24s ease-in-out infinite;"/>
+      <circle cx="650" cy="50" r="3" fill="#0F766E" opacity="0.28" style="animation: floatB 28s ease-in-out infinite;"/>
+      <circle cx="1000" cy="680" r="6" fill="#14B8A6" opacity="0.35" style="animation: floatA 22s ease-in-out infinite;"/>
+      <circle cx="200" cy="880" r="4" fill="#5EEAD4" opacity="0.30" style="animation: floatC 24s ease-in-out infinite;"/>
     </svg>
     <div class="relative z-10 mx-auto max-w-6xl">
       <div class="reveal reveal-up">
@@ -742,6 +711,10 @@
           <h3 class="mt-2 font-heading text-xl font-bold text-txt">Realize & Scale</h3>
           <p class="mt-3 text-sm leading-relaxed text-txt-secondary">Once validated, I run the change management to make it sustainable, then enable the solution as a platform-level feature. Clear handover, documentation, KPI tracking.</p>
         </div>
+      </div>
+
+      <div class="reveal reveal-up mt-12 flex justify-center">
+        <img src="ai-ecosystem.png" alt="AI Ecosystem — User Insights, Tech Scaling, Business Impact, Roadmap Alignment" class="w-full max-w-sm rounded-xl">
       </div>
 
       <div class="reveal reveal-up mt-10 text-center">
@@ -922,6 +895,10 @@
           </h2>
           <div class="mt-6 flex flex-wrap gap-3 md:justify-end">
             <a href="mailto:fabiosouzao13@gmail.com" class="rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-accent-hover hover:-translate-y-0.5 cursor-pointer">Get in Touch</a>
+            <a href="https://wa.me/5511971009072" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-3 text-sm font-medium text-txt-secondary transition-all duration-300 hover:border-accent hover:text-accent hover:-translate-y-0.5 cursor-pointer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
             <a href="https://www.linkedin.com/in/f%C3%A1bio-de-souza-oliveira" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-3 text-sm font-medium text-txt-secondary transition-all duration-300 hover:border-accent hover:text-accent hover:-translate-y-0.5 cursor-pointer">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               LinkedIn
